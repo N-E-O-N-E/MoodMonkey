@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
             MoodMonkeyTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
-                        name = "Monkey",
+                        name = "Monkeys",
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
