@@ -16,12 +16,12 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.moodmonkey.R
-import com.example.moodmonkey.ui.data.moodEntryModel
+import com.example.moodmonkey.ui.data.MoodEntryModel
 import com.example.moodmonkey.ui.theme.MoodMonkeyTheme
 
 @Composable
 fun MoodEntryCardView(
-    entry: moodEntryModel,
+    entry: MoodEntryModel,
 ) {
     var showContent by remember { mutableStateOf(false) }
 
@@ -161,11 +161,11 @@ fun MoodEntryCardView(
 fun MoodEntryCardPreview() {
     MoodMonkeyTheme {
         MoodEntryCardView(
-            entry = moodEntryModel(
+            entry = MoodEntryModel(
                 id = 1,
                 moodEntryTitle = "Happy Day!",
                 moodEntryContent = "Heute war ein toller Tag, weil ich nach langem endlich Milan wieder beleidigen konnte während Dieter am reden war..",
-                moodEntryBar = 5,
+                moodEntryBar = 0.5f,
                 moodEntryDate = "03.02.2025",
                 moodEntryActivity = "Spazieren"
             )
