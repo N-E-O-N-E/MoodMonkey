@@ -1,4 +1,4 @@
-package com.example.moodmonkey.ui.data
+package com.example.moodmonkey.data
 
 import androidx.room.Dao
 import androidx.room.Delete

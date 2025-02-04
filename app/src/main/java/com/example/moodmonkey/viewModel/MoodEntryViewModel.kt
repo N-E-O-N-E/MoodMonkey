@@ -1,10 +1,10 @@
-package com.example.moodmonkey.ui.viewModel
+package com.example.moodmonkey.viewModel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.moodmonkey.ui.data.MoodDatabase
-import com.example.moodmonkey.ui.data.MoodEntryModel
+import com.example.moodmonkey.data.MoodDatabase
+import com.example.moodmonkey.data.MoodEntryModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn

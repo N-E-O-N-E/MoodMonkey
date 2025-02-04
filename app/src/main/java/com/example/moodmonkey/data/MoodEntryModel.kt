@@ -1,4 +1,4 @@
-package com.example.moodmonkey.ui.data
+package com.example.moodmonkey.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

@@ -1,4 +1,4 @@
-package com.example.moodmonkey.ui.data
+package com.example.moodmonkey.data
 
 import android.content.Context
 import androidx.room.Database

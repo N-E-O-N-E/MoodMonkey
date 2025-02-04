@@ -16,8 +16,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.moodmonkey.R
-import com.example.moodmonkey.ui.data.MoodEntryModel
+import com.example.moodmonkey.data.MoodEntryModel
 import com.example.moodmonkey.ui.theme.MoodMonkeyTheme
+
 
 @Composable
 fun MoodEntryCardView(

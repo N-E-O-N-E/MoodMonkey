@@ -1,9 +1,8 @@
-package com.example.moodmonkey.ui.navigation
+package com.example.moodmonkey.navigation
 
 import androidx.annotation.DrawableRes
 import com.example.moodmonkey.R
 import kotlinx.serialization.Serializable
-
 
 enum class NavItem(
     val route: Any,

@@ -1,4 +1,4 @@
-package com.example.moodmonkey.ui.views
+package com.example.moodmonkey.views
 
 import MoodEntryCardView
 import androidx.compose.foundation.layout.Column
@@ -10,12 +10,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.moodmonkey.ui.data.MoodEntryModel
-import com.example.moodmonkey.ui.theme.MoodMonkeyTheme
-import com.example.moodmonkey.ui.viewModel.MoodEntryViewModel
+import com.example.moodmonkey.data.MoodEntryModel
+
 
 @Composable
 fun MoodEntryListView(
@@ -43,4 +40,3 @@ fun MoodEntryListView(
         }
     }
 }
-
