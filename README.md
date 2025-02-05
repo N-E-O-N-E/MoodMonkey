@@ -12,6 +12,10 @@ datastorePreferences = "1.1.1"
 //Room
 roomRuntime = "2.6.1"
 kspVersion = "2.0.21-1.0.27"
+
+//Charts
+composeCharts = "0.1.1"
+
 ```
 [libraries]
 ```sh
@@ -29,6 +33,10 @@ androidx-datastore-preferences = { group = "androidx.datastore", name = "datasto
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntime" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
+
+//Charts
+compose-charts = { module = "io.github.ehsannarmani:compose-charts", version.ref = "composeCharts" }
+
 ```
 [plugins]
 ```sh
@@ -70,8 +78,12 @@ implementation(libs.androidx.datastore.preferences)
 implementation(libs.androidx.room.runtime)
 implementation(libs.androidx.room.ktx)
 ksp(libs.androidx.room.compiler)
-```
+
+// Charts
+implementation (libs.compose.charts)
 }
+
+```
 
 
 
