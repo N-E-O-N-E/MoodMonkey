@@ -1,56 +1,52 @@
 package com.example.moodmonkey.views
 
-import android.R.attr.fontStyle
-import android.graphics.fonts.FontStyle
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.Slider
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.moodmonkey.data.EntryModel
-import com.example.moodmonkey.viewModel.MoodEntryViewModel
+import com.example.moodmonkey.data.basicActivities
+import com.example.moodmonkey.views.Components.ActivityCards
+import com.example.moodmonkey.views.Components.activitySlider
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NewEntryView(
-    viewModel: MoodEntryViewModel = viewModel(),
-    modifier: Modifier = Modifier
-) {
-
-    var moodSlider by remember { mutableStateOf(0.5f) }
+fun NewEntryView() {
     var moodContent by remember { mutableStateOf("") }
 
-    Column(modifier = modifier.fillMaxSize(), verticalArrangement = Arrangement.Top) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
 
-        Text("New Entry", modifier = Modifier.padding(all = 10.dp))
-
-
-        //TODO: Slider
-
-        Slider(
-            value = moodSlider,
-            onValueChange = { moodSlider = it },
-            valueRange = 0.0f..1.0f,
-            modifier = Modifier.padding(16.dp)
+        Text(
+            "New Mood Entry", modifier = Modifier.padding(all = 10.dp),
+            fontSize = MaterialTheme.typography.headlineLarge.fontSize
         )
 
-        //TODO: ActivityList LazyRow
+
+        // Components
+        //ActivityDatePicker()
+        var moodSliderValue = activitySlider()
+        ActivityCards(activityList = basicActivities)
 
 
         //TODO: Content Multiline TextField
@@ -73,10 +69,10 @@ fun NewEntryView(
                 val newMoodEntry = EntryModel(
                     moodEntryTitle = "",
                     moodEntryContent = moodContent,
-                    moodEntryBar = moodSlider,
+                    moodEntryBar = moodSliderValue,
                     moodEntryDate = ""
                 )
-                viewModel.insert(newMoodEntry)
+
             }
         ) {
             Text("Save Entry")
@@ -84,8 +80,9 @@ fun NewEntryView(
     }
 }
 
-@Preview(showSystemUi = true, showBackground = true, name = "NewEntry")
+
+@Preview(showSystemUi = true, showBackground = true)
 @Composable
-private fun NewEntryViewPreview() {
+private fun PreviewNewEntry() {
     NewEntryView()
 }

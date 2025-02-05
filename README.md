@@ -1,4 +1,4 @@
-libs.versions.toml
+#libs.versions.toml
 
 [versions]
 ```sh
@@ -16,7 +16,11 @@ kspVersion = "2.0.21-1.0.27"
 //Charts
 composeCharts = "0.1.1"
 
+//DateTime
+composeDateTime = "0.9.0"
+
 ```
+
 [libraries]
 ```sh
 //Navigation
@@ -37,7 +41,11 @@ androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "
 //Charts
 compose-charts = { module = "io.github.ehsannarmani:compose-charts", version.ref = "composeCharts" }
 
+//DateTimePicker
+datetime = { module = "io.github.vanpra.compose-material-dialogs:datetime", version.ref = "composeDateTime" }
+
 ```
+
 [plugins]
 ```sh
 //Navigation
@@ -50,7 +58,7 @@ kotlin-ksp = {id = "com.google.devtools.ksp", version.ref = "kspVersion"}
 
 
 
-build.gradle.kts (Module :app)
+#build.gradle.kts (Module :app)
 
 plugins {
 ```sh
@@ -83,13 +91,16 @@ ksp(libs.androidx.room.compiler)
 implementation (libs.compose.charts)
 }
 
+// DateTimePicker
+implementation(libs.datetime)
+
 ```
 
 
 
 
 
-build.gradle.kts (Project: ...)
+#build.gradle.kts (Project: ...)
 
 plugins {
 ```sh

@@ -1,13 +1,11 @@
 package com.example.moodmonkey
 
-import android.R.attr.name
 import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.padding
-import androidx.compose.ui.Modifier
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -21,10 +19,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MoodMonkeyTheme {
+            MoodMonkeyTheme(darkTheme = isSystemInDarkTheme(), dynamicColor = false) {
                 AppNavigation()
             }
         }
     }
 }
-

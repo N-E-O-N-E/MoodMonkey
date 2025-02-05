@@ -20,10 +20,7 @@ import com.example.moodmonkey.data.basicActivities
 
 
 @Composable
-fun MoodEntryListView(
-    modifier: Modifier = Modifier,
-    entries: List<EntryModel>,
-    ) {
+fun MoodEntryListView(modifier: Modifier = Modifier, entries: List<EntryModel>) {
 
     Column(
         modifier = Modifier
@@ -48,7 +45,10 @@ fun MoodEntryListView(
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
             items(basicActivities) { activity ->
                 Row(modifier = Modifier.fillMaxWidth()) {
-                    Icon(painter = painterResource(id = activity.activityIcon), contentDescription = "$activity.activityName")
+                    Icon(
+                        painter = painterResource(id = activity.activityIcon),
+                        contentDescription = "$activity.activityName"
+                    )
                     Text(activity.activityName, modifier = Modifier.padding(all = 10.dp))
                 }
 

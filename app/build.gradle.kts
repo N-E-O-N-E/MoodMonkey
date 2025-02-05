@@ -73,5 +73,7 @@ dependencies {
     ksp(libs.androidx.room.compiler)
     // Charts
     implementation (libs.compose.charts)
+    // DateTimePicker
+    implementation(libs.datetime)
 
 }
