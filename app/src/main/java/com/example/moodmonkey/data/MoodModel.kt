@@ -2,6 +2,7 @@ package com.example.moodmonkey.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.moodmonkey.R
 import java.util.UUID
 
 
@@ -32,9 +33,15 @@ data class ActivityModel(
     val activityIcon: Int,
 )
 
-/*
-        INSERT INTO moodList VALUE(ID, E1)
-        INSERT INTO moodList VALUE(ID, A1)
 
-        INSERT INTO entryToActivity VALUE(ID, E1, A1)
-*/
+val basicActivities: List<ActivityModel> = listOf(
+    ActivityModel(activityName = "Sport", activityIcon = R.drawable.baseline_circle_24),
+    ActivityModel(activityName = "Business", activityIcon = R.drawable.baseline_circle_24),
+    ActivityModel(activityName = "Family", activityIcon = R.drawable.baseline_circle_24),
+    ActivityModel(activityName = "Health", activityIcon = R.drawable.baseline_circle_24),
+    ActivityModel(activityName = "Hobby", activityIcon = R.drawable.baseline_circle_24),
+    ActivityModel(activityName = "Education", activityIcon = R.drawable.baseline_circle_24),
+    ActivityModel(activityName = "Travel", activityIcon = R.drawable.baseline_circle_24),
+    ActivityModel(activityName = "Entertainment", activityIcon = R.drawable.baseline_circle_24),
+    ActivityModel(activityName = "Spirituality", activityIcon = R.drawable.baseline_circle_24),
+)
