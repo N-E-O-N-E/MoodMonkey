@@ -1,4 +1,4 @@
-#libs.versions.toml
+# libs.versions.toml
 
 [versions]
 ```sh
@@ -58,7 +58,7 @@ kotlin-ksp = {id = "com.google.devtools.ksp", version.ref = "kspVersion"}
 
 
 
-#build.gradle.kts (Module :app)
+# build.gradle.kts (Module :app)
 
 plugins {
 ```sh
@@ -100,7 +100,7 @@ implementation(libs.datetime)
 
 
 
-#build.gradle.kts (Project: ...)
+# build.gradle.kts (Project: ...)
 
 plugins {
 ```sh
