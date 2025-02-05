@@ -91,7 +91,7 @@ fun MoodEntryCardView(
                             ) {
                                 Icon(
                                     painter = painterResource(
-                                        id = if (showContent) R.drawable.baseline_arrow_drop_down_circle_24 else R.drawable.baseline_circle_24
+                                        id = if (showContent) R.drawable.baseline_keyboard_double_arrow_up_24 else R.drawable.baseline_keyboard_double_arrow_down_24
                                     ),
                                     contentDescription = null
                                 )
