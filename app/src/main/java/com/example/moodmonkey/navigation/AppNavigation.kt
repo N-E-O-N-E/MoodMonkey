@@ -23,7 +23,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.moodmonkey.viewModel.MoodEntryViewModel
 import com.example.moodmonkey.views.MoodEntryListView
-import com.example.moodmonkey.views.NewEntry
+import com.example.moodmonkey.views.NewEntryView
 import com.example.moodmonkey.views.StatisticView
 
 @Composable
@@ -71,7 +71,7 @@ fun AppNavigation() {
             }
 
             composable<NewEntryRoute> {
-                NewEntry()
+                NewEntryView()
             }
 
             composable<StatisticsRoute> {

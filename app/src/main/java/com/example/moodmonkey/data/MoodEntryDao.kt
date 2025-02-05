@@ -13,14 +13,14 @@ import kotlinx.coroutines.flow.Flow
 interface MoodDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(mood: MoodEntryModel)
+    suspend fun insert(mood: EntryModel)
 
     @Query("SELECT * from moodList ORDER BY id ASC")
-    fun getAllItems(): Flow<List<MoodEntryModel>>
+    fun getAllItems(): Flow<List<EntryModel>>
 
     @Delete
-    suspend fun delete(mood: MoodEntryModel)
+    suspend fun delete(mood: EntryModel)
 
     @Update
-    suspend fun update(mood: MoodEntryModel)
+    suspend fun update(mood: EntryModel)
 }

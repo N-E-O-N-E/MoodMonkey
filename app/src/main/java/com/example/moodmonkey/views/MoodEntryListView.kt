@@ -11,13 +11,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.moodmonkey.data.MoodEntryModel
+import com.example.moodmonkey.data.EntryModel
 
 
 @Composable
 fun MoodEntryListView(
     modifier: Modifier = Modifier,
-    entries: List<MoodEntryModel>,
+    entries: List<EntryModel>,
     ) {
     Column(
         modifier = Modifier
