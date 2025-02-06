@@ -3,6 +3,7 @@ package com.example.moodmonkey.views.Components
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
@@ -42,6 +43,7 @@ fun activityDatePicker(modifier: Modifier = Modifier): String {
     Text(
         datePickerValue, modifier = Modifier
             .width(220.dp)
+            .height(50.dp)
             .padding(all = 10.dp)
             .border(1.dp, MaterialTheme.colorScheme.primary)
             .clickable(onClick = { dialogState.show() }),
