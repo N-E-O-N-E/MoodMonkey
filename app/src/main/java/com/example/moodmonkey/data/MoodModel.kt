@@ -27,14 +27,8 @@ data class EntryModel(
             parentColumns = ["id"],
             childColumns = ["entryId"],
             onDelete = ForeignKey.CASCADE
-        ),
-        ForeignKey(
-            entity = ActivityModel::class,
-            parentColumns = ["id"],
-            childColumns = ["activityId"],
-            onDelete = ForeignKey.CASCADE
         )
-    ], indices = [Index(value = ["entryId"]), Index(value = ["activityId"])]
+    ], indices = [Index(value = ["entryId"])]
 )
 data class EntryToActivity(
     @PrimaryKey(autoGenerate = true)

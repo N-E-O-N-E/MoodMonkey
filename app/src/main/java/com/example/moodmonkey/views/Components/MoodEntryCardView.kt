@@ -286,7 +286,6 @@ fun MoodEntryCardView(
                                         .padding(top = 8.dp)
                                         .clickable(onClick = {
                                             viewModel.delete(entry)
-
                                         })
                                 )
                             }
