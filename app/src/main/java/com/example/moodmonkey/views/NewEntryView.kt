@@ -22,6 +22,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewModelScope
@@ -61,8 +63,9 @@ fun NewEntryView(
 
         // Headline
         Text(
-            "New Mood Entry", modifier = Modifier.padding(vertical = 15.dp),
-            fontSize = MaterialTheme.typography.headlineLarge.fontSize
+            "Add Mood", modifier = Modifier.fillMaxWidth().padding(vertical = 15.dp),
+            fontWeight = FontWeight.Bold, textAlign = TextAlign.Start,
+            fontSize = MaterialTheme.typography.headlineLarge.fontSize,
         )
         // Component Slider
         var moodSliderValue = activitySlider()

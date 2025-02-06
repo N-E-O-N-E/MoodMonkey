@@ -18,7 +18,8 @@ import androidx.compose.ui.unit.dp
 import com.example.moodmonkey.R
 import com.example.moodmonkey.data.EntryModel
 import com.example.moodmonkey.ui.theme.MoodMonkeyTheme
-
+import com.example.moodmonkey.ui.theme.primaryLight
+import com.example.moodmonkey.ui.theme.secondaryContainerLight
 
 @Composable
 fun MoodEntryCardView(
@@ -27,31 +28,28 @@ fun MoodEntryCardView(
     var showContent by remember { mutableStateOf(false) }
 
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp),
+        modifier = Modifier.fillMaxWidth().padding(8.dp),
         shape = RoundedCornerShape(12.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
+        colors = CardDefaults.cardColors(secondaryContainerLight)
     ) {
         Column {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Color(0xFFFFF59D).copy(alpha = 0.35f))
+                    .background(primaryLight)
                     .padding(8.dp),
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
                     text = entry.moodEntryDate,
-                    fontWeight = FontWeight.Bold
+                    fontSize = MaterialTheme.typography.bodyLarge.fontSize,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White
                 )
                 Spacer(modifier = Modifier
                     .width(8.dp))
-                Text(
-                    text = "Today",
-                    color = Color.Gray
-                )
             }
 
             Row(
@@ -80,11 +78,13 @@ fun MoodEntryCardView(
                     ) {
                         Text(
                             text = entry.moodEntryTitle,
-                            fontWeight = FontWeight.Bold
+                            fontWeight = FontWeight.Bold,
+                            fontSize = MaterialTheme.typography.bodyLarge.fontSize,
                         )
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Text(
                                 text = "⏰ 12:30",
+                                fontSize = MaterialTheme.typography.bodyLarge.fontSize,
                             )
                             IconButton(
                                 onClick = { showContent = !showContent }
@@ -130,26 +130,39 @@ fun MoodEntryCardView(
                     Spacer(modifier = Modifier
                         .height(8.dp))
 
-                    HorizontalDivider(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        thickness = 1.dp,
-                        color = Color.Black
-                    )
-
                     Spacer(modifier = Modifier
                         .height(8.dp))
 
                     AnimatedVisibility(
                         visible = showContent
                     ) {
-                        Text(
-                            text = entry.moodEntryContent,
-                            maxLines = 3,
-                            overflow = TextOverflow.Ellipsis,
-                            modifier = Modifier
-                                .padding(top = 8.dp)
-                        )
+                        Column {
+                            HorizontalDivider(
+                                modifier = Modifier
+                                    .fillMaxWidth(),
+                                thickness = 1.dp,
+                                color = Color.Black
+                            )
+
+                            Text(
+                                text = entry.moodEntryTitle,
+                                fontSize = MaterialTheme.typography.bodyLarge.fontSize,
+                                fontWeight = FontWeight.Bold,
+                                maxLines = 3,
+                                overflow = TextOverflow.Ellipsis,
+                                modifier = Modifier
+                                    .padding(top = 8.dp)
+                            )
+
+                            Text(
+                                text = entry.moodEntryContent,
+                                fontSize = MaterialTheme.typography.bodyLarge.fontSize,
+                                maxLines = 3,
+                                overflow = TextOverflow.Ellipsis,
+                                modifier = Modifier
+                                    .padding(top = 8.dp)
+                            )
+                        }
                     }
                 }
             }
