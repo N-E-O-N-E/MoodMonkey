@@ -65,13 +65,11 @@ fun AppNavigation() {
             ) {
 
             composable<DashboardRoute> {
-                MoodEntryListView(entries = moodList)
+                MoodEntryListView(entries = moodList, viewModel = viewModel)
             }
 
             composable<NewEntryRoute> {
-                NewEntryView(
-
-                )
+                NewEntryView(viewModel, navController)
             }
 
             composable<StatisticsRoute> {

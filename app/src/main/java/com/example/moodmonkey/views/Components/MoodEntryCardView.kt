@@ -36,7 +36,7 @@ import java.time.format.DateTimeFormatter
 
 @Composable
 fun MoodEntryCardView(
-    entry: EntryModel, viewModel: MoodEntryViewModel = viewModel()
+    entry: EntryModel, viewModel: MoodEntryViewModel
 ) {
     var showContent by remember { mutableStateOf(false) }
     var titleText by remember { mutableStateOf("") }
@@ -258,7 +258,7 @@ fun MoodEntryCardPreview() {
                 moodEntryBar = 61f,
                 moodEntryDate = "03.02.2025",
                 moodEntryTime = "15:52"
-            )
+            ), viewModel = viewModel()
         )
     }
 }

@@ -1,5 +1,6 @@
 package com.example.moodmonkey.views
 
+import android.R.attr.dialogTitle
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -30,9 +31,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import com.example.moodmonkey.data.ActivityModel
 import com.example.moodmonkey.data.EntryModel
 import com.example.moodmonkey.data.basicActivities
+import com.example.moodmonkey.navigation.DashboardRoute
+import com.example.moodmonkey.navigation.NavItem
 import com.example.moodmonkey.viewModel.MoodEntryViewModel
 import com.example.moodmonkey.views.Components.AlertDialogPopUp
 import com.example.moodmonkey.views.Components.activityCards
@@ -41,11 +45,13 @@ import com.example.moodmonkey.views.Components.activitySlider
 import com.example.moodmonkey.views.Components.activityTimePicker
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.serialization.Serializable
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewEntryView(
-    viewModel: MoodEntryViewModel = viewModel()
+    viewModel: MoodEntryViewModel,
+    navController: NavHostController
 ) {
     val lastEntry by viewModel.getLastEntry.collectAsState()
     val openAlertDialog = remember { mutableStateOf(false) }
@@ -66,7 +72,7 @@ fun NewEntryView(
 
         // Headline
         Text(
-            "Add Mood",
+            "New Mood",
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 15.dp),
@@ -128,7 +134,6 @@ fun NewEntryView(
                 AlertDialogPopUp(
                     onDismissRequest = { openAlertDialog.value = false },
                     onConfirmation = {
-
                         viewModel.viewModelScope.launch {
                             var newMoodEntry = EntryModel(
                                 moodEntryTitle = moodTitle,
@@ -139,13 +144,12 @@ fun NewEntryView(
                             )
                             viewModel.insert(newMoodEntry)
 
-                            delay(500)
+                            delay(600)
 
                             var lastEntryElement = lastEntry.lastOrNull()
                             selectedActivities.forEach { activity ->
                                 viewModel.saveRelationchips(lastEntryElement?.id ?: 0, activity.id)
                             }
-
 
                             // Reset Values
                             moodTitle = ""
@@ -154,10 +158,10 @@ fun NewEntryView(
                             datePickerValue = ""
                             timePickerValue = ""
                             selectedActivities = emptyList()
-                        }
 
-                        openAlertDialog.value = false
-                        println("Confirmation registered")
+                            openAlertDialog.value = false
+                            navController.navigate(DashboardRoute)
+                        }
                     },
                     dialogTitle = "SAVE ENTRY?",
                     dialogText = "Do you really want to save?",
@@ -168,8 +172,3 @@ fun NewEntryView(
     }
 }
 
-@Preview(showSystemUi = true, showBackground = true)
-@Composable
-private fun PreviewNewEntry() {
-    NewEntryView()
-}
