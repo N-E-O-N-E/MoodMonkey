@@ -3,6 +3,7 @@ import android.R.attr.onClick
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.shape.CircleShape
@@ -20,16 +21,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.moodmonkey.R
 import com.example.moodmonkey.data.EntryModel
 import com.example.moodmonkey.ui.theme.MoodMonkeyTheme
+import com.example.moodmonkey.ui.theme.onErrorContainerLight
 import com.example.moodmonkey.ui.theme.primaryLight
 import com.example.moodmonkey.ui.theme.secondaryContainerLight
+import com.example.moodmonkey.viewModel.MoodEntryViewModel
 import java.time.format.DateTimeFormatter
 
 @Composable
 fun MoodEntryCardView(
-    entry: EntryModel,
+    entry: EntryModel, viewModel: MoodEntryViewModel = viewModel()
 ) {
     var showContent by remember { mutableStateOf(false) }
     var titleText by remember { mutableStateOf("") }
@@ -79,9 +83,9 @@ fun MoodEntryCardView(
                     painter = painterResource(
                         id = when {
                             entry.moodEntryBar <= 20.0 -> R.drawable.angry
-                            entry.moodEntryBar  in 20.1..40.0 -> R.drawable.sad
-                            entry.moodEntryBar  in 40.1..60.0 -> R.drawable.neutral
-                            entry.moodEntryBar  in 60.1..80.0 -> R.drawable.happy
+                            entry.moodEntryBar in 20.1..40.0 -> R.drawable.sad
+                            entry.moodEntryBar in 40.1..60.0 -> R.drawable.neutral
+                            entry.moodEntryBar in 60.1..80.0 -> R.drawable.happy
                             else -> R.drawable.amazing
 
                         }
@@ -110,9 +114,9 @@ fun MoodEntryCardView(
                         Text(
                             text = when {
                                 entry.moodEntryBar <= 20.0 -> "Angry"
-                                entry.moodEntryBar  in 20.1..40.0 -> "Sad"
-                                entry.moodEntryBar  in 40.1..60.0 -> "Neutral"
-                                entry.moodEntryBar  in 60.1..80.0 -> "Happy"
+                                entry.moodEntryBar in 20.1..40.0 -> "Sad"
+                                entry.moodEntryBar in 40.1..60.0 -> "Neutral"
+                                entry.moodEntryBar in 60.1..80.0 -> "Happy"
                                 else -> "Amazing"
 
                             },
@@ -121,7 +125,10 @@ fun MoodEntryCardView(
                         )
                         Row(verticalAlignment = Alignment.CenterVertically) {
 
-                            Icon(painter = painterResource(id = R.drawable.baseline_access_time_24), contentDescription = null)
+                            Icon(
+                                painter = painterResource(id = R.drawable.baseline_access_time_24),
+                                contentDescription = null
+                            )
                             Text(
                                 text = entry.moodEntryTime,
                                 fontSize = MaterialTheme.typography.bodyLarge.fontSize,
@@ -167,42 +174,66 @@ fun MoodEntryCardView(
                                 Image(
                                     painter = painterResource(R.drawable.baseline_circle_24),
                                     contentDescription = "", contentScale = ContentScale.Fit,
-                                    modifier = Modifier.padding(horizontal = 2.dp).width(28.dp).height(28.dp)
-                                )
-                                Image(
-                                    painter = painterResource(R.drawable.baseline_circle_24),
-                                    contentDescription = "",contentScale = ContentScale.Fit,
-                                    modifier = Modifier.padding(horizontal = 2.dp).width(28.dp).height(28.dp)
-                                )
-                                Image(
-                                    painter = painterResource(R.drawable.baseline_circle_24),
-                                    contentDescription = "",contentScale = ContentScale.Fit,
-                                    modifier = Modifier.padding(horizontal = 2.dp).width(28.dp).height(28.dp)
-                                )
-                                Image(
-                                    painter = painterResource(R.drawable.baseline_circle_24),
-                                    contentDescription = "",contentScale = ContentScale.Fit,
-                                    modifier = Modifier.padding(horizontal = 2.dp).width(28.dp).height(28.dp)
+                                    modifier = Modifier
+                                        .padding(horizontal = 2.dp)
+                                        .width(28.dp)
+                                        .height(28.dp)
                                 )
                                 Image(
                                     painter = painterResource(R.drawable.baseline_circle_24),
                                     contentDescription = "", contentScale = ContentScale.Fit,
-                                    modifier = Modifier.padding(horizontal = 2.dp).width(28.dp).height(28.dp)
+                                    modifier = Modifier
+                                        .padding(horizontal = 2.dp)
+                                        .width(28.dp)
+                                        .height(28.dp)
                                 )
                                 Image(
                                     painter = painterResource(R.drawable.baseline_circle_24),
-                                    contentDescription = "",contentScale = ContentScale.Fit,
-                                    modifier = Modifier.padding(horizontal = 2.dp).width(28.dp).height(28.dp)
+                                    contentDescription = "", contentScale = ContentScale.Fit,
+                                    modifier = Modifier
+                                        .padding(horizontal = 2.dp)
+                                        .width(28.dp)
+                                        .height(28.dp)
                                 )
                                 Image(
                                     painter = painterResource(R.drawable.baseline_circle_24),
-                                    contentDescription = "",contentScale = ContentScale.Fit,
-                                    modifier = Modifier.padding(horizontal = 2.dp).width(28.dp).height(28.dp)
+                                    contentDescription = "", contentScale = ContentScale.Fit,
+                                    modifier = Modifier
+                                        .padding(horizontal = 2.dp)
+                                        .width(28.dp)
+                                        .height(28.dp)
                                 )
                                 Image(
                                     painter = painterResource(R.drawable.baseline_circle_24),
-                                    contentDescription = "",contentScale = ContentScale.Fit,
-                                    modifier = Modifier.padding(horizontal = 2.dp).width(28.dp).height(28.dp)
+                                    contentDescription = "", contentScale = ContentScale.Fit,
+                                    modifier = Modifier
+                                        .padding(horizontal = 2.dp)
+                                        .width(28.dp)
+                                        .height(28.dp)
+                                )
+                                Image(
+                                    painter = painterResource(R.drawable.baseline_circle_24),
+                                    contentDescription = "", contentScale = ContentScale.Fit,
+                                    modifier = Modifier
+                                        .padding(horizontal = 2.dp)
+                                        .width(28.dp)
+                                        .height(28.dp)
+                                )
+                                Image(
+                                    painter = painterResource(R.drawable.baseline_circle_24),
+                                    contentDescription = "", contentScale = ContentScale.Fit,
+                                    modifier = Modifier
+                                        .padding(horizontal = 2.dp)
+                                        .width(28.dp)
+                                        .height(28.dp)
+                                )
+                                Image(
+                                    painter = painterResource(R.drawable.baseline_circle_24),
+                                    contentDescription = "", contentScale = ContentScale.Fit,
+                                    modifier = Modifier
+                                        .padding(horizontal = 2.dp)
+                                        .width(28.dp)
+                                        .height(28.dp)
                                 )
 
                             }
@@ -238,6 +269,27 @@ fun MoodEntryCardView(
                                 modifier = Modifier
                                     .padding(top = 8.dp)
                             )
+
+                            HorizontalDivider(
+                                modifier = Modifier
+                                    .fillMaxWidth(),
+                                thickness = 1.dp,
+                                color = Color.Black
+                            )
+
+                            Row(modifier = Modifier.fillMaxWidth(1f), horizontalArrangement = Arrangement.End) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.baseline_delete_24),
+                                    contentDescription = "Trash it",
+                                    tint = Color.Red.copy(alpha = 0.65f),
+                                    modifier = Modifier
+                                        .padding(top = 8.dp)
+                                        .clickable(onClick = {
+                                            viewModel.delete(entry)
+
+                                        })
+                                )
+                            }
                         }
                     }
                 }

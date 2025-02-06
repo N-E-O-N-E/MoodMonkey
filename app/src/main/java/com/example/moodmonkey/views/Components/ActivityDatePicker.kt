@@ -36,7 +36,7 @@ fun activityDatePicker(modifier: Modifier = Modifier): String {
         }
     ) {
         datepicker { date ->
-            datePickerValue = date.toString()
+            datePickerValue = date.toString().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
         }
     }
 

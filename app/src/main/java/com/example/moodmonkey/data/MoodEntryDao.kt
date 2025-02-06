@@ -30,6 +30,9 @@ interface MoodDao {
     @Delete
     suspend fun delete(mood: EntryModel)
 
+    @Delete
+    suspend fun deleteRelationship(listEntry: EntryToActivity)
+
     @Update
     suspend fun update(mood: EntryModel)
 }
