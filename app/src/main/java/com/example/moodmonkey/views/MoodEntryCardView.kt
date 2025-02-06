@@ -168,6 +168,7 @@ fun MoodEntryCardPreview() {
                 moodEntryContent = "Heute war ein toller Tag, weil ich nach langem endlich Milan wieder beleidigen konnte während Dieter am reden war..",
                 moodEntryBar = 0.5f,
                 moodEntryDate = "03.02.2025",
+                moodEntryTime = "15:52"
             )
         )
     }

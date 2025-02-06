@@ -16,15 +16,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.vanpra.composematerialdialogs.MaterialDialog
-import com.vanpra.composematerialdialogs.datetime.date.datepicker
+import com.vanpra.composematerialdialogs.datetime.time.timepicker
 import com.vanpra.composematerialdialogs.rememberMaterialDialogState
-import kotlinx.coroutines.selects.select
-import java.time.LocalDate
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 
 
 @Composable
-fun activityDatePicker(modifier: Modifier = Modifier): String {
-    var datePickerValue by remember { mutableStateOf("Date select") }
+fun activityTimePicker(modifier: Modifier = Modifier): String {
+    var timePickerValue by remember { mutableStateOf("Time select") }
     val dialogState = rememberMaterialDialogState()
 
     MaterialDialog(
@@ -34,19 +34,20 @@ fun activityDatePicker(modifier: Modifier = Modifier): String {
             negativeButton("Cancel")
         }
     ) {
-        datepicker { date ->
-            datePickerValue = date.toString()
+        timepicker { time ->
+            timePickerValue = time.toString().format(DateTimeFormatter.ofPattern("HH:MM"))
         }
     }
 
     Text(
-        datePickerValue, modifier = Modifier
-            .width(220.dp)
+        timePickerValue, modifier = Modifier
+            .width(200.dp)
             .padding(all = 10.dp)
             .border(1.dp, MaterialTheme.colorScheme.primary)
             .clickable(onClick = { dialogState.show() }),
         textAlign = TextAlign.Center,
         fontSize = MaterialTheme.typography.titleLarge.fontSize
     )
-    return datePickerValue
+
+    return timePickerValue
 }

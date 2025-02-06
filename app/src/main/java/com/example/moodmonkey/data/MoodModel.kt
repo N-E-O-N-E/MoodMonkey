@@ -3,7 +3,6 @@ package com.example.moodmonkey.data
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.moodmonkey.R
-import java.util.UUID
 
 
 @Entity(tableName = "moodList")
@@ -15,10 +14,11 @@ data class EntryModel(
     val moodEntryContent: String,
     val moodEntryBar: Float,
     val moodEntryDate: String,
+    val moodEntryTime: String,
 )
 
 @Entity(tableName = "entryToActivityList")
-data class entryToActivity(
+data class EntryToActivity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val entryId: Long,

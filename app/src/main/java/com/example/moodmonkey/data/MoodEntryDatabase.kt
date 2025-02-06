@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 
 
-@Database(entities = [EntryModel::class, ActivityModel::class, entryToActivity::class ], version = 1, exportSchema = false)
+@Database(entities = [EntryModel::class, ActivityModel::class, EntryToActivity::class ], version = 1, exportSchema = false)
 abstract class MoodDatabase : RoomDatabase() {
     abstract fun moodDao(): MoodDao
 
