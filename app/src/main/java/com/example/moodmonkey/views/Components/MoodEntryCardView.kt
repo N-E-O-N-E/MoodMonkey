@@ -107,6 +107,9 @@ fun MoodEntryCardView(
                             .fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
+
+                        //Todo: Activities aus der Datenbank für dieses Entrie lesen und ausgeben (forEach/Items)
+
                         Icon(
                             painter = painterResource(id = R.drawable.baseline_add_circle_outline_24),
                             contentDescription = null,
