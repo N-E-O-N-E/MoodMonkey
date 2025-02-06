@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.moodmonkey.R
 import com.example.moodmonkey.data.EntryModel
+import com.example.moodmonkey.data.basicActivities
 import com.example.moodmonkey.ui.theme.MoodMonkeyTheme
 import com.example.moodmonkey.ui.theme.onErrorContainerLight
 import com.example.moodmonkey.ui.theme.primaryLight
@@ -171,71 +172,18 @@ fun MoodEntryCardView(
 
                                 //Todo: Activities aus der Datenbank für dieses Entrie lesen und ausgeben (forEach/Items)
 
-                                Image(
-                                    painter = painterResource(R.drawable.baseline_circle_24),
-                                    contentDescription = "", contentScale = ContentScale.Fit,
-                                    modifier = Modifier
-                                        .padding(horizontal = 2.dp)
-                                        .width(28.dp)
-                                        .height(28.dp)
-                                )
-                                Image(
-                                    painter = painterResource(R.drawable.baseline_circle_24),
-                                    contentDescription = "", contentScale = ContentScale.Fit,
-                                    modifier = Modifier
-                                        .padding(horizontal = 2.dp)
-                                        .width(28.dp)
-                                        .height(28.dp)
-                                )
-                                Image(
-                                    painter = painterResource(R.drawable.baseline_circle_24),
-                                    contentDescription = "", contentScale = ContentScale.Fit,
-                                    modifier = Modifier
-                                        .padding(horizontal = 2.dp)
-                                        .width(28.dp)
-                                        .height(28.dp)
-                                )
-                                Image(
-                                    painter = painterResource(R.drawable.baseline_circle_24),
-                                    contentDescription = "", contentScale = ContentScale.Fit,
-                                    modifier = Modifier
-                                        .padding(horizontal = 2.dp)
-                                        .width(28.dp)
-                                        .height(28.dp)
-                                )
-                                Image(
-                                    painter = painterResource(R.drawable.baseline_circle_24),
-                                    contentDescription = "", contentScale = ContentScale.Fit,
-                                    modifier = Modifier
-                                        .padding(horizontal = 2.dp)
-                                        .width(28.dp)
-                                        .height(28.dp)
-                                )
-                                Image(
-                                    painter = painterResource(R.drawable.baseline_circle_24),
-                                    contentDescription = "", contentScale = ContentScale.Fit,
-                                    modifier = Modifier
-                                        .padding(horizontal = 2.dp)
-                                        .width(28.dp)
-                                        .height(28.dp)
-                                )
-                                Image(
-                                    painter = painterResource(R.drawable.baseline_circle_24),
-                                    contentDescription = "", contentScale = ContentScale.Fit,
-                                    modifier = Modifier
-                                        .padding(horizontal = 2.dp)
-                                        .width(28.dp)
-                                        .height(28.dp)
-                                )
-                                Image(
-                                    painter = painterResource(R.drawable.baseline_circle_24),
-                                    contentDescription = "", contentScale = ContentScale.Fit,
-                                    modifier = Modifier
-                                        .padding(horizontal = 2.dp)
-                                        .width(28.dp)
-                                        .height(28.dp)
-                                )
 
+                                basicActivities.forEach() { item ->
+                                    Image(
+                                        painter = painterResource(item.activityIcon),
+                                        contentDescription = "", contentScale = ContentScale.Fit,
+                                        modifier = Modifier
+                                            .padding(horizontal = 2.dp)
+                                            .width(28.dp)
+                                            .height(28.dp)
+                                    )
+
+                                }
                             }
 
                             Spacer(

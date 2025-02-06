@@ -48,12 +48,12 @@ data class ActivityModel(
 
 
 val basicActivities: List<ActivityModel> = listOf(
-    ActivityModel(id = 0, activityName = "Sport", activityIcon = R.drawable.baseline_circle_24),
-    ActivityModel(id = 1, activityName = "Business", activityIcon = R.drawable.baseline_circle_24),
-    ActivityModel(id = 2, activityName = "Family", activityIcon = R.drawable.baseline_circle_24),
-    ActivityModel(id = 3, activityName = "Health", activityIcon = R.drawable.baseline_circle_24),
-    ActivityModel(id = 4, activityName = "Hobby", activityIcon = R.drawable.baseline_circle_24),
-    ActivityModel(id = 5, activityName = "Education", activityIcon = R.drawable.baseline_circle_24),
-    ActivityModel(id = 6, activityName = "Travel", activityIcon = R.drawable.baseline_circle_24),
-    ActivityModel(id = 7,activityName = "Entertainment", activityIcon = R.drawable.baseline_circle_24),
+    ActivityModel(id = 0, activityName = "Sport", activityIcon = R.drawable.baseline_sports_tennis_24),
+    ActivityModel(id = 1, activityName = "Business", activityIcon = R.drawable.baseline_business_center_24),
+    ActivityModel(id = 2, activityName = "Family", activityIcon = R.drawable.baseline_family_restroom_24),
+    ActivityModel(id = 3, activityName = "Health", activityIcon = R.drawable.baseline_healing_24),
+    ActivityModel(id = 4, activityName = "Hobby", activityIcon = R.drawable.baseline_directions_bike_24),
+    ActivityModel(id = 5, activityName = "Education", activityIcon = R.drawable.baseline_menu_book_24),
+    ActivityModel(id = 6, activityName = "Travel", activityIcon = R.drawable.baseline_flight_takeoff_24),
+    ActivityModel(id = 7,activityName = "Entertainment", activityIcon = R.drawable.baseline_live_tv_24),
 )
