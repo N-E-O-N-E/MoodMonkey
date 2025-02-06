@@ -39,7 +39,7 @@ fun MoodEntryListView(
             painter = painterResource(id = R.drawable.wallpaper),
             contentDescription = null,
             contentScale = ContentScale.Crop,
-            alpha = 0.4F,
+            alpha = 0.6F,
             modifier = Modifier.fillMaxSize()
         )
 

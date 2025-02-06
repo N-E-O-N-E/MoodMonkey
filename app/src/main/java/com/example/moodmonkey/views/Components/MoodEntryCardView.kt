@@ -1,9 +1,11 @@
+import android.R.attr.contentDescription
 import android.R.attr.fontWeight
 import android.R.attr.onClick
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.shape.CircleShape
@@ -45,7 +47,7 @@ fun MoodEntryCardView(
             .fillMaxWidth()
             .padding(8.dp),
         shape = RoundedCornerShape(10.dp),
-        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.8f)
+        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.7f)
     ) {
         Column {
             Row(
@@ -175,7 +177,7 @@ fun MoodEntryCardView(
 
                                 basicActivities.forEach() { item ->
                                     Image(
-                                        painter = painterResource(item.activityIcon),
+                                        painter = painterResource(if(isSystemInDarkTheme()) { item.activityIconLight} else { item.activityIconDark}),
                                         contentDescription = "", contentScale = ContentScale.Fit,
                                         modifier = Modifier
                                             .padding(horizontal = 2.dp)

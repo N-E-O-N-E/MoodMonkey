@@ -43,17 +43,18 @@ data class ActivityModel(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val activityName: String,
-    val activityIcon: Int,
+    val activityIconLight: Int,
+    val activityIconDark: Int
 )
 
 
 val basicActivities: List<ActivityModel> = listOf(
-    ActivityModel(id = 0, activityName = "Sport", activityIcon = R.drawable.baseline_sports_tennis_24),
-    ActivityModel(id = 1, activityName = "Business", activityIcon = R.drawable.baseline_business_center_24),
-    ActivityModel(id = 2, activityName = "Family", activityIcon = R.drawable.baseline_family_restroom_24),
-    ActivityModel(id = 3, activityName = "Health", activityIcon = R.drawable.baseline_healing_24),
-    ActivityModel(id = 4, activityName = "Hobby", activityIcon = R.drawable.baseline_directions_bike_24),
-    ActivityModel(id = 5, activityName = "Education", activityIcon = R.drawable.baseline_menu_book_24),
-    ActivityModel(id = 6, activityName = "Travel", activityIcon = R.drawable.baseline_flight_takeoff_24),
-    ActivityModel(id = 7,activityName = "SocialMedia", activityIcon = R.drawable.baseline_live_tv_24),
+    ActivityModel(id = 0, activityName = "Sport", activityIconDark = R.drawable.baseline_sports_tennis_24, activityIconLight = R.drawable.baseline_sports_tennis_24_white),
+    ActivityModel(id = 1, activityName = "Business", activityIconDark = R.drawable.baseline_business_center_24, activityIconLight = R.drawable.baseline_business_center_24_white),
+    ActivityModel(id = 2, activityName = "Family", activityIconDark = R.drawable.baseline_family_restroom_24, activityIconLight = R.drawable.baseline_family_restroom_24_white),
+    ActivityModel(id = 3, activityName = "Health", activityIconDark = R.drawable.baseline_healing_24, activityIconLight = R.drawable.baseline_healing_24_white),
+    ActivityModel(id = 4, activityName = "Hobby", activityIconDark = R.drawable.baseline_directions_bike_24, activityIconLight = R.drawable.baseline_directions_bike_24_white),
+    ActivityModel(id = 5, activityName = "Education", activityIconDark = R.drawable.baseline_menu_book_24, activityIconLight = R.drawable.baseline_menu_book_24_white),
+    ActivityModel(id = 6, activityName = "Travel", activityIconDark = R.drawable.baseline_flight_takeoff_24, activityIconLight = R.drawable.baseline_flight_takeoff_24_white),
+    ActivityModel(id = 7,activityName = "SocialMedia", activityIconDark = R.drawable.baseline_live_tv_24, activityIconLight = R.drawable.baseline_live_tv_24_white),
 )

@@ -4,6 +4,7 @@ import android.R.attr.contentDescription
 import android.R.attr.onClick
 import android.R.attr.text
 import android.annotation.SuppressLint
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -17,6 +18,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.getValue
@@ -56,7 +59,7 @@ fun activityCards(activityList: List<ActivityModel>): List<ActivityModel> {
             ) {
                 Row {
 
-                    Icon(painter = painterResource(id = activity.activityIcon), contentDescription = "")
+                    Icon(painter = painterResource(id = if(isSystemInDarkTheme()) { activity.activityIconLight } else { activity.activityIconDark }), contentDescription = "")
                     Text(
                         text = "\t${activity.activityName}",
                         modifier = Modifier
