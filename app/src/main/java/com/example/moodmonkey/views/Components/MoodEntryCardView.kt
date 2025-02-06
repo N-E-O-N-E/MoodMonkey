@@ -40,13 +40,12 @@ fun MoodEntryCardView(
 ) {
     var showContent by remember { mutableStateOf(false) }
     var titleText by remember { mutableStateOf("") }
-    Card(
+    Surface(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp),
-        shape = RoundedCornerShape(12.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 3.dp),
-        colors = CardDefaults.cardColors()
+        shape = RoundedCornerShape(10.dp),
+        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.8f)
     ) {
         Column {
             Row(
@@ -226,7 +225,10 @@ fun MoodEntryCardView(
                                 color = Color.Black
                             )
 
-                            Row(modifier = Modifier.fillMaxWidth(1f), horizontalArrangement = Arrangement.End) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(1f),
+                                horizontalArrangement = Arrangement.End
+                            ) {
                                 Icon(
                                     painter = painterResource(id = R.drawable.baseline_delete_24),
                                     contentDescription = "Trash it",

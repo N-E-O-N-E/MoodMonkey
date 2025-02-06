@@ -2,6 +2,7 @@ package com.example.moodmonkey.views
 
 import androidx.compose.animation.core.EaseInOutCubic
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -21,11 +22,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.moodmonkey.R
 import ir.ehsannarmani.compose_charts.LineChart
 import ir.ehsannarmani.compose_charts.extensions.format
 import ir.ehsannarmani.compose_charts.models.AnimationMode
@@ -45,150 +49,162 @@ fun StatisticView(modifier: Modifier = Modifier) {
         xAxisProperties = GridProperties.AxisProperties(
             thickness = .2.dp,
             color = SolidColor(Color.Gray.copy(alpha = .5f)),
-            style = StrokeStyle.Dashed(intervals = floatArrayOf(15f,15f), phase = 10f),
+            style = StrokeStyle.Dashed(intervals = floatArrayOf(15f, 15f), phase = 10f),
         ),
         yAxisProperties = GridProperties.AxisProperties(
             thickness = .2.dp,
             color = SolidColor(Color.Gray.copy(alpha = .5f)),
-            style = StrokeStyle.Dashed(intervals = floatArrayOf(15f,15f), phase = 10f),
+            style = StrokeStyle.Dashed(intervals = floatArrayOf(15f, 15f), phase = 10f),
         ),
     )
     val dividerProperties = DividerProperties(
         xAxisProperties = LineProperties(
             thickness = .2.dp,
             color = SolidColor(Color.Gray.copy(alpha = .5f)),
-            style = StrokeStyle.Dashed(intervals = floatArrayOf(15f,15f), phase = 10f),
+            style = StrokeStyle.Dashed(intervals = floatArrayOf(15f, 15f), phase = 10f),
         ),
         yAxisProperties = LineProperties(
             thickness = .2.dp,
             color = SolidColor(Color.Gray.copy(alpha = .5f)),
-            style = StrokeStyle.Dashed(intervals = floatArrayOf(15f,15f), phase = 10f),
+            style = StrokeStyle.Dashed(intervals = floatArrayOf(15f, 15f), phase = 10f),
         )
     )
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 20.dp),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        // Headline
-        Text(
-            "Statistics",
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 15.dp),
-            fontWeight = FontWeight.Bold, textAlign = TextAlign.Start,
-            fontSize = MaterialTheme.typography.headlineLarge.fontSize,
+    Box {
+        Image(
+            painter = painterResource(id = R.drawable.wallpaper),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            alpha = 0.4F,
+            modifier = Modifier.fillMaxSize()
         )
 
-
-        val data = remember {
-            listOf(
-                Line(
-                    label = "Windows",
-                    values = listOf(
-                        75.0,
-                        5.0,
-                        70.0,
-                        85.0,
-                        0.0
-                    ),
-                    color = SolidColor(Color(0xFF2B8130)),
-                    firstGradientFillColor = Color(0xFF66BB6A).copy(alpha = .4f),
-                    secondGradientFillColor = Color.Transparent,
-                    strokeAnimationSpec = tween(2000, easing = EaseInOutCubic),
-                    gradientAnimationDelay = 1000,
-                    drawStyle = DrawStyle.Stroke(.5.dp),
-                    curvedEdges = true
-                ),
-                Line(
-                    label = "Linux",
-                    values = listOf(
-                        1.0,
-                        19.0,
-                        22.0,
-                        0.0,
-                        5.0
-                    ),
-                    color = SolidColor(Color(0xFFDA860C)),
-                    firstGradientFillColor = Color(0xFFFFA726).copy(alpha = .4f),
-                    secondGradientFillColor = Color.Transparent,
-                    strokeAnimationSpec = tween(2000, easing = EaseInOutCubic),
-                    gradientAnimationDelay = 1000,
-                    drawStyle = DrawStyle.Stroke(.5.dp)
-                ),
-                Line(
-                    label = "MacOS",
-                    values = listOf(
-                        4.0,
-                        40.0,
-                        58.0,
-                        38.0,
-                        22.0
-                    ),
-                    color = SolidColor(Color(0xFF0F73C4)),
-                    firstGradientFillColor = Color(0xFF42A5F5).copy(alpha = .4f),
-                    secondGradientFillColor = Color.Transparent,
-                    strokeAnimationSpec = tween(2000, easing = EaseInOutCubic),
-                    gradientAnimationDelay = 1000,
-                    drawStyle = DrawStyle.Stroke(.5.dp),
-                    curvedEdges = true,
-                ),
-            )
-        }
-        Card(
+        Column(
             modifier = Modifier
-                .height(270.dp)
-                .fillMaxWidth()
-                .weight(1f)
-                .border(2.dp, Color.Transparent, RoundedCornerShape(12.dp)),
-            elevation = CardDefaults.elevatedCardElevation(2.dp),
-            colors = CardDefaults.cardColors(
-                containerColor = Color(0xff2D2D2D)
-            )
-        ) {
-            Box(modifier = Modifier
                 .fillMaxSize()
-                .padding(vertical = 12.dp)) {
-                LineChart(
+                .padding(horizontal = 20.dp),
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            // Headline
+            Text(
+                "Statistics",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 15.dp),
+                fontWeight = FontWeight.Bold, textAlign = TextAlign.Start,
+                fontSize = MaterialTheme.typography.headlineLarge.fontSize,
+            )
+
+
+            val data = remember {
+                listOf(
+                    Line(
+                        label = "Windows",
+                        values = listOf(
+                            75.0,
+                            5.0,
+                            70.0,
+                            85.0,
+                            0.0
+                        ),
+                        color = SolidColor(Color(0xFF2B8130)),
+                        firstGradientFillColor = Color(0xFF66BB6A).copy(alpha = .4f),
+                        secondGradientFillColor = Color.Transparent,
+                        strokeAnimationSpec = tween(2000, easing = EaseInOutCubic),
+                        gradientAnimationDelay = 1000,
+                        drawStyle = DrawStyle.Stroke(.5.dp),
+                        curvedEdges = true
+                    ),
+                    Line(
+                        label = "Linux",
+                        values = listOf(
+                            1.0,
+                            19.0,
+                            22.0,
+                            0.0,
+                            5.0
+                        ),
+                        color = SolidColor(Color(0xFFDA860C)),
+                        firstGradientFillColor = Color(0xFFFFA726).copy(alpha = .4f),
+                        secondGradientFillColor = Color.Transparent,
+                        strokeAnimationSpec = tween(2000, easing = EaseInOutCubic),
+                        gradientAnimationDelay = 1000,
+                        drawStyle = DrawStyle.Stroke(.5.dp)
+                    ),
+                    Line(
+                        label = "MacOS",
+                        values = listOf(
+                            4.0,
+                            40.0,
+                            58.0,
+                            38.0,
+                            22.0
+                        ),
+                        color = SolidColor(Color(0xFF0F73C4)),
+                        firstGradientFillColor = Color(0xFF42A5F5).copy(alpha = .4f),
+                        secondGradientFillColor = Color.Transparent,
+                        strokeAnimationSpec = tween(2000, easing = EaseInOutCubic),
+                        gradientAnimationDelay = 1000,
+                        drawStyle = DrawStyle.Stroke(.5.dp),
+                        curvedEdges = true,
+                    ),
+                )
+            }
+            Card(
+                modifier = Modifier
+                    .height(270.dp)
+                    .fillMaxWidth()
+                    .weight(1f)
+                    .border(2.dp, Color.Transparent, RoundedCornerShape(12.dp)),
+                elevation = CardDefaults.elevatedCardElevation(2.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = Color(0xff2D2D2D)
+                )
+            ) {
+                Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(horizontal = 22.dp),
-                    data = data,
-                    animationMode = AnimationMode.Together(delayBuilder = {
-                        it * 500L
-                    }),
-                    gridProperties = gridProperties,
-                    dividerProperties = dividerProperties,
-                    popupProperties = PopupProperties(
-                        textStyle = TextStyle(
-                            fontSize = 11.sp,
-                            color = Color.White,
+                        .padding(vertical = 12.dp)
+                ) {
+                    LineChart(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(horizontal = 22.dp),
+                        data = data,
+                        animationMode = AnimationMode.Together(delayBuilder = {
+                            it * 500L
+                        }),
+                        gridProperties = gridProperties,
+                        dividerProperties = dividerProperties,
+                        popupProperties = PopupProperties(
+                            textStyle = TextStyle(
+                                fontSize = 11.sp,
+                                color = Color.White,
+                            ),
+                            contentBuilder = {
+                                it.format(1) + " Million"
+                            },
+                            containerColor = Color(0xff414141)
                         ),
-                        contentBuilder = {
-                            it.format(1) + " Million"
-                        },
-                        containerColor = Color(0xff414141)
-                    ),
-                    indicatorProperties = HorizontalIndicatorProperties(
-                        textStyle = TextStyle(
-                            fontSize = 11.sp,
-                            color = Color.White,
+                        indicatorProperties = HorizontalIndicatorProperties(
+                            textStyle = TextStyle(
+                                fontSize = 11.sp,
+                                color = Color.White,
+                            ),
+                            contentBuilder = {
+                                it.format(1) + " M"
+                            },
                         ),
-                        contentBuilder = {
-                            it.format(1) + " M"
-                        },
-                    ),
-                    labelHelperProperties = LabelHelperProperties(
-                        textStyle = TextStyle(
-                            fontSize = 12.sp,
-                            color = Color.White
-                        )
-                    ),
-                    curvedEdges = false
-                )
+                        labelHelperProperties = LabelHelperProperties(
+                            textStyle = TextStyle(
+                                fontSize = 12.sp,
+                                color = Color.White
+                            )
+                        ),
+                        curvedEdges = false
+                    )
+                }
             }
         }
     }
