@@ -25,6 +25,7 @@ import com.example.moodmonkey.R
 import com.example.moodmonkey.data.EntryModel
 import com.example.moodmonkey.data.basicActivities
 import com.example.moodmonkey.viewModel.MoodEntryViewModel
+import kotlinx.coroutines.flow.forEach
 
 
 @Composable
@@ -59,8 +60,16 @@ fun MoodEntryListView(
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
-                items(entries) { entry ->
-                    MoodEntryCardView(entry = entry, viewModel = viewModel)
+                // Hier war nicht die Datenbankabfrage drin
+//                items(entries) { entry ->
+//                    MoodEntryCardView(entry = entry, viewModel = viewModel)
+//                }
+
+                //Jetzt mit Datenbankabfrage
+                viewModel.allMoods.value.forEach{entry ->
+                    item {
+                        MoodEntryCardView(entry = entry, viewModel = viewModel)
+                    }
                 }
             }
         }

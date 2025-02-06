@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -23,10 +25,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.moodmonkey.R
 import com.example.moodmonkey.data.EntryModel
 import com.example.moodmonkey.data.basicActivities
+import com.example.moodmonkey.navigation.DashboardRoute
 import com.example.moodmonkey.ui.theme.MoodMonkeyTheme
 import com.example.moodmonkey.ui.theme.onErrorContainerLight
 import com.example.moodmonkey.ui.theme.primaryLight
@@ -34,6 +38,9 @@ import com.example.moodmonkey.ui.theme.secondaryContainerLight
 import com.example.moodmonkey.ui.theme.surfaceBrightLight
 import com.example.moodmonkey.ui.theme.surfaceDimLight
 import com.example.moodmonkey.viewModel.MoodEntryViewModel
+import com.example.moodmonkey.views.Components.AlertDialogPopUp
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.time.format.DateTimeFormatter
 
 @Composable
@@ -41,7 +48,8 @@ fun MoodEntryCardView(
     entry: EntryModel, viewModel: MoodEntryViewModel
 ) {
     var showContent by remember { mutableStateOf(false) }
-    var titleText by remember { mutableStateOf("") }
+    var openAlertDialog = remember { mutableStateOf(false) }
+
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -177,7 +185,13 @@ fun MoodEntryCardView(
 
                                 basicActivities.forEach() { item ->
                                     Image(
-                                        painter = painterResource(if(isSystemInDarkTheme()) { item.activityIconLight} else { item.activityIconDark}),
+                                        painter = painterResource(
+                                            if (isSystemInDarkTheme()) {
+                                                item.activityIconLight
+                                            } else {
+                                                item.activityIconDark
+                                            }
+                                        ),
                                         contentDescription = "", contentScale = ContentScale.Fit,
                                         modifier = Modifier
                                             .padding(horizontal = 2.dp)
@@ -238,7 +252,7 @@ fun MoodEntryCardView(
                                     modifier = Modifier
                                         .padding(top = 8.dp)
                                         .clickable(onClick = {
-                                            viewModel.delete(entry)
+                                            openAlertDialog.value = true
                                         })
                                 )
                             }
@@ -246,6 +260,24 @@ fun MoodEntryCardView(
                     }
                 }
             }
+
+            when {
+                openAlertDialog.value -> {
+                    AlertDialogPopUp(
+                        onDismissRequest = { openAlertDialog.value = false },
+                        onConfirmation = {
+                            viewModel.viewModelScope.launch {
+                                viewModel.delete(entry)
+                                openAlertDialog.value = false
+                            }
+                        },
+                        dialogTitle = "DELETE ENTRY ?",
+                        dialogText = "Do you really want to delete the Entry with all Activities of them?",
+                        icon = Icons.Default.Info
+                    )
+                }
+            }
+
         }
     }
 }

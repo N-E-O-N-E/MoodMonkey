@@ -21,7 +21,7 @@ interface MoodDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(mood: EntryModel)
 
-    @Query("SELECT * FROM moodList ORDER BY id ASC")
+    @Query("SELECT * FROM moodList ORDER BY id DESC")
     fun getAllItems(): Flow<List<EntryModel>>
 
     @Query("SELECT * FROM moodList ORDER BY id DESC LIMIT 1")
