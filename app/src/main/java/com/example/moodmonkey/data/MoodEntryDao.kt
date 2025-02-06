@@ -13,6 +13,9 @@ import kotlinx.coroutines.flow.Flow
 interface MoodDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertRelationchip(relationchip: EntryToActivity)
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun initialActivitiesInsert(mood: ActivityModel)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

@@ -1,5 +1,6 @@
 package com.example.moodmonkey.viewModel
 
+import android.R.attr.data
 import android.app.Application
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
@@ -8,6 +9,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moodmonkey.data.ActivityModel
 import com.example.moodmonkey.data.EntryModel
+import com.example.moodmonkey.data.EntryToActivity
 import com.example.moodmonkey.data.MoodDatabase
 import com.example.moodmonkey.data.basicActivities
 import com.example.moodmonkey.dataStore
@@ -79,4 +81,12 @@ class MoodEntryViewModel(application: Application) : AndroidViewModel(applicatio
             value[DATASTORE_ACTIVITY_STATE] = savedValue.value
         }
     }
+
+    fun saveRelationchips(moodEntry: Int, activity: Int) {
+        viewModelScope.launch {
+            dao.insertRelationchip(EntryToActivity(entryId = moodEntry, activityId = activity))
+        }
+    }
+
+
 }

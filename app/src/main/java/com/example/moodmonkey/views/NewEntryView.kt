@@ -1,8 +1,10 @@
 package com.example.moodmonkey.views
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -21,9 +23,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.moodmonkey.data.ActivityModel
 import com.example.moodmonkey.data.EntryModel
 import com.example.moodmonkey.data.basicActivities
-import com.example.moodmonkey.views.Components.ActivityCards
+import com.example.moodmonkey.viewModel.MoodEntryViewModel
+import com.example.moodmonkey.views.Components.activityCards
 import com.example.moodmonkey.views.Components.activityDatePicker
 import com.example.moodmonkey.views.Components.activitySlider
 import com.example.moodmonkey.views.Components.activityTimePicker
@@ -31,59 +36,101 @@ import com.example.moodmonkey.views.Components.activityTimePicker
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NewEntryView() {
+fun NewEntryView(
+    viewModel: MoodEntryViewModel = viewModel()
+) {
+    var moodTitle by remember { mutableStateOf("") }
     var moodContent by remember { mutableStateOf("") }
     var datePickerValue: String = ""
     var timePickerValue: String = ""
 
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 20.dp),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
+
         // Headline
         Text(
-            "New Mood Entry", modifier = Modifier.padding(all = 10.dp),
-            fontSize = MaterialTheme.typography.headlineLarge.fontSize)
+            "New Mood Entry", modifier = Modifier.padding(vertical = 15.dp),
+            fontSize = MaterialTheme.typography.headlineLarge.fontSize
+        )
         // Component Slider
         var moodSliderValue = activitySlider()
-        Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp)) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 10.dp)
+        ) {
             // Component DatePicker
             datePickerValue = activityDatePicker()
             // Component TimePicker
             timePickerValue = activityTimePicker()
         }
         // Component ActivityCard
-        ActivityCards(activityList = basicActivities)
+        var selectedActivities: List<ActivityModel> = activityCards(activityList = basicActivities)
 
 
-        //TODO: Content Multiline TextField
+
+        TextField(value = moodTitle,
+            onValueChange = { moodTitle = it },
+            modifier = Modifier
+                .fillMaxWidth(1f)
+                .padding(vertical = 10.dp),
+            shape = RectangleShape,
+            singleLine = false,
+            placeholder = { Text("Add Title") }
+        )
+
         TextField(value = moodContent,
             onValueChange = { moodContent = it },
             modifier = Modifier
-                .fillMaxWidth(0.65f)
-                .padding(all = 10.dp),
+                .fillMaxWidth(1f)
+                .padding(vertical = 10.dp),
             shape = RectangleShape,
             singleLine = false,
             placeholder = { Text("Add Content") }
         )
 
 
-        //TODO: Save Button -> Creates new MoodEntry with Date
+        Spacer(modifier = Modifier.weight(1f))
 
-        Button(
+
+        Button(modifier = Modifier
+            .fillMaxWidth(1f)
+            .padding(vertical = 10.dp),
             onClick = {
-                val newMoodEntry = EntryModel(
-                    moodEntryTitle = "",
+                var newMoodEntry = EntryModel(
+                    id = 0,
+                    moodEntryTitle = moodTitle,
                     moodEntryContent = moodContent,
                     moodEntryBar = moodSliderValue.toFloat(),
                     moodEntryDate = datePickerValue,
                     moodEntryTime = timePickerValue
                 )
+                viewModel.insert(newMoodEntry)
+                selectedActivities.forEach { activity ->
+                    Log.d("MainActivity", activity.activityName)
+                    Log.d("MainActivity", activity.id.toString())
+                    Log.d("MainActivity", newMoodEntry.id.toString())
+
+                    viewModel.saveRelationchips(newMoodEntry.id, activity.id)
+                }
+                // Reset Values
+                moodTitle = ""
+                moodContent = ""
+                moodSliderValue = 50.0f
+                datePickerValue = ""
+                timePickerValue = ""
+                selectedActivities = emptyList()
+
             }
+
         ) {
-            Text("Save Entry")
+            Text("Save yor Mood")
         }
     }
 }

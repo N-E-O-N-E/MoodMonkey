@@ -7,9 +7,8 @@ import com.example.moodmonkey.R
 
 @Entity(tableName = "moodList")
 data class EntryModel(
-
     @PrimaryKey(autoGenerate = true)
-    val id: Long = 0,
+    val id: Int = 0,
     val moodEntryTitle: String,
     val moodEntryContent: String,
     val moodEntryBar: Float,
@@ -17,31 +16,32 @@ data class EntryModel(
     val moodEntryTime: String,
 )
 
-@Entity(tableName = "entryToActivityList")
-data class EntryToActivity(
-    @PrimaryKey(autoGenerate = true)
-    val id: Long = 0,
-    val entryId: Long,
-    val activityId: Long?,
+@Entity(
+    tableName = "entryToActivityList",
+    primaryKeys = ["entryId", "activityId"]
 )
+data class EntryToActivity(
+    val entryId: Int,
+    val activityId: Int
+)
+
 
 @Entity(tableName = "activityList")
 data class ActivityModel(
     @PrimaryKey(autoGenerate = true)
-    val id: Long = 0,
+    val id: Int = 0,
     val activityName: String,
     val activityIcon: Int,
 )
 
 
 val basicActivities: List<ActivityModel> = listOf(
-    ActivityModel(activityName = "Sport", activityIcon = R.drawable.baseline_circle_24),
-    ActivityModel(activityName = "Business", activityIcon = R.drawable.baseline_circle_24),
-    ActivityModel(activityName = "Family", activityIcon = R.drawable.baseline_circle_24),
-    ActivityModel(activityName = "Health", activityIcon = R.drawable.baseline_circle_24),
-    ActivityModel(activityName = "Hobby", activityIcon = R.drawable.baseline_circle_24),
-    ActivityModel(activityName = "Education", activityIcon = R.drawable.baseline_circle_24),
-    ActivityModel(activityName = "Travel", activityIcon = R.drawable.baseline_circle_24),
-    ActivityModel(activityName = "Entertainment", activityIcon = R.drawable.baseline_circle_24),
-    ActivityModel(activityName = "Spirituality", activityIcon = R.drawable.baseline_circle_24),
+    ActivityModel(id = 0, activityName = "Sport", activityIcon = R.drawable.baseline_circle_24),
+    ActivityModel(id = 1, activityName = "Business", activityIcon = R.drawable.baseline_circle_24),
+    ActivityModel(id = 2, activityName = "Family", activityIcon = R.drawable.baseline_circle_24),
+    ActivityModel(id = 3, activityName = "Health", activityIcon = R.drawable.baseline_circle_24),
+    ActivityModel(id = 4, activityName = "Hobby", activityIcon = R.drawable.baseline_circle_24),
+    ActivityModel(id = 5, activityName = "Education", activityIcon = R.drawable.baseline_circle_24),
+    ActivityModel(id = 6, activityName = "Travel", activityIcon = R.drawable.baseline_circle_24),
+    ActivityModel(id = 7,activityName = "Entertainment", activityIcon = R.drawable.baseline_circle_24),
 )
