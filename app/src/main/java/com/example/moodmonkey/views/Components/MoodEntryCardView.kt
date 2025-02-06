@@ -29,6 +29,8 @@ import com.example.moodmonkey.ui.theme.MoodMonkeyTheme
 import com.example.moodmonkey.ui.theme.onErrorContainerLight
 import com.example.moodmonkey.ui.theme.primaryLight
 import com.example.moodmonkey.ui.theme.secondaryContainerLight
+import com.example.moodmonkey.ui.theme.surfaceBrightLight
+import com.example.moodmonkey.ui.theme.surfaceDimLight
 import com.example.moodmonkey.viewModel.MoodEntryViewModel
 import java.time.format.DateTimeFormatter
 
@@ -43,8 +45,8 @@ fun MoodEntryCardView(
             .fillMaxWidth()
             .padding(8.dp),
         shape = RoundedCornerShape(12.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
-        colors = CardDefaults.cardColors(secondaryContainerLight)
+        elevation = CardDefaults.cardElevation(defaultElevation = 3.dp),
+        colors = CardDefaults.cardColors()
     ) {
         Column {
             Row(
@@ -67,7 +69,6 @@ fun MoodEntryCardView(
                     text = "Date: ${entry.moodEntryDate}",
                     fontSize = MaterialTheme.typography.bodyLarge.fontSize,
                     fontWeight = FontWeight.Bold,
-                    color = Color.Black
                 )
                 Spacer(
                     modifier = Modifier

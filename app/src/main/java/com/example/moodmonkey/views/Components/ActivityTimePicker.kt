@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -41,16 +42,17 @@ fun activityTimePicker(modifier: Modifier = Modifier): String {
         }
     }
 
-    Text(
-        timePickerValue, modifier = Modifier
-            .width(200.dp)
-            .height(50.dp)
-            .padding(all = 10.dp)
-            .border(1.dp, MaterialTheme.colorScheme.primary)
-            .clickable(onClick = { dialogState.show() }),
-        textAlign = TextAlign.Center,
-        fontSize = MaterialTheme.typography.titleLarge.fontSize
-    )
+    Card {
+        Text(
+            timePickerValue, modifier = Modifier
+                .width(200.dp)
+                .height(40.dp)
+                .padding(all = 5.dp)
+                .clickable(onClick = { dialogState.show() }),
+            textAlign = TextAlign.Center,
+            fontSize = MaterialTheme.typography.titleLarge.fontSize
+        )
+    }
 
     return timePickerValue
 }

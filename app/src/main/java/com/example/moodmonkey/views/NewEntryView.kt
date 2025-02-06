@@ -6,7 +6,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -31,6 +34,7 @@ import com.example.moodmonkey.data.ActivityModel
 import com.example.moodmonkey.data.EntryModel
 import com.example.moodmonkey.data.basicActivities
 import com.example.moodmonkey.viewModel.MoodEntryViewModel
+import com.example.moodmonkey.views.Components.AlertDialogPopUp
 import com.example.moodmonkey.views.Components.activityCards
 import com.example.moodmonkey.views.Components.activityDatePicker
 import com.example.moodmonkey.views.Components.activitySlider
@@ -44,6 +48,7 @@ fun NewEntryView(
     viewModel: MoodEntryViewModel = viewModel()
 ) {
     val lastEntry by viewModel.getLastEntry.collectAsState()
+    val openAlertDialog = remember { mutableStateOf(false) }
 
     var moodTitle by remember { mutableStateOf("") }
     var moodContent by remember { mutableStateOf("") }
@@ -61,7 +66,10 @@ fun NewEntryView(
 
         // Headline
         Text(
-            "Add Mood", modifier = Modifier.fillMaxWidth().padding(vertical = 15.dp),
+            "Add Mood",
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 15.dp),
             fontWeight = FontWeight.Bold, textAlign = TextAlign.Start,
             fontSize = MaterialTheme.typography.headlineLarge.fontSize,
         )
@@ -70,7 +78,8 @@ fun NewEntryView(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 10.dp)
+                .padding(vertical = 5.dp)
+                .padding(horizontal = 5.dp)
         ) {
             // Component DatePicker
             datePickerValue = activityDatePicker()
@@ -85,20 +94,21 @@ fun NewEntryView(
             onValueChange = { moodTitle = it },
             modifier = Modifier
                 .fillMaxWidth(1f)
-                .padding(vertical = 10.dp),
+                .padding(vertical = 5.dp),
             shape = RectangleShape,
             singleLine = false,
-            placeholder = { Text("Add Title") }
+            placeholder = { Text("Title") }
         )
 
         TextField(value = moodContent,
             onValueChange = { moodContent = it },
             modifier = Modifier
                 .fillMaxWidth(1f)
-                .padding(vertical = 10.dp),
+                .height(150.dp)
+                .padding(vertical = 5.dp),
             shape = RectangleShape,
             singleLine = false,
-            placeholder = { Text("Add Content") }
+            placeholder = { Text("Notice") }
         )
 
         Spacer(modifier = Modifier.weight(1f))
@@ -107,36 +117,53 @@ fun NewEntryView(
             .fillMaxWidth(1f)
             .padding(vertical = 10.dp),
             onClick = {
-                viewModel.viewModelScope.launch {
-                    var newMoodEntry = EntryModel(
-                        moodEntryTitle = moodTitle,
-                        moodEntryContent = moodContent,
-                        moodEntryBar = moodSliderValue.toFloat(),
-                        moodEntryDate = datePickerValue,
-                        moodEntryTime = timePickerValue
-                    )
-                    viewModel.insert(newMoodEntry)
-
-                    delay(500)
-
-                    var lastEntryElement = lastEntry.lastOrNull()
-                    selectedActivities.forEach { activity ->
-                        viewModel.saveRelationchips(lastEntryElement?.id ?: 0, activity.id)
-                    }
-
-                    // Reset Values
-                    moodTitle = ""
-                    moodContent = ""
-                    moodSliderValue = 50.0f
-                    datePickerValue = ""
-                    timePickerValue = ""
-                    selectedActivities = emptyList()
-
-                }
+                openAlertDialog.value = true
             }
 
         ) {
-            Text("Save yor Mood")
+            Text("Save your Mood")
+        }
+        when {
+            openAlertDialog.value -> {
+                AlertDialogPopUp(
+                    onDismissRequest = { openAlertDialog.value = false },
+                    onConfirmation = {
+
+                        viewModel.viewModelScope.launch {
+                            var newMoodEntry = EntryModel(
+                                moodEntryTitle = moodTitle,
+                                moodEntryContent = moodContent,
+                                moodEntryBar = moodSliderValue.toFloat(),
+                                moodEntryDate = datePickerValue,
+                                moodEntryTime = timePickerValue
+                            )
+                            viewModel.insert(newMoodEntry)
+
+                            delay(500)
+
+                            var lastEntryElement = lastEntry.lastOrNull()
+                            selectedActivities.forEach { activity ->
+                                viewModel.saveRelationchips(lastEntryElement?.id ?: 0, activity.id)
+                            }
+
+
+                            // Reset Values
+                            moodTitle = ""
+                            moodContent = ""
+                            moodSliderValue = 50.0f
+                            datePickerValue = ""
+                            timePickerValue = ""
+                            selectedActivities = emptyList()
+                        }
+
+                        openAlertDialog.value = false
+                        println("Confirmation registered")
+                    },
+                    dialogTitle = "SAVE ENTRY?",
+                    dialogText = "Do you really want to save?",
+                    icon = Icons.Default.Info
+                )
+            }
         }
     }
 }

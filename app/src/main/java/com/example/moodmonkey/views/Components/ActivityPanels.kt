@@ -2,6 +2,7 @@ package com.example.moodmonkey.views.Components
 
 import android.R.attr.contentDescription
 import android.R.attr.onClick
+import android.R.attr.text
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -13,6 +14,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Button
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -40,10 +42,9 @@ fun activityCards(activityList: List<ActivityModel>): List<ActivityModel> {
         contentPadding = PaddingValues(vertical = 10.dp),
     ) {
         items(basicActivities) { activity ->
-
             val isSelected = activity in selectedActivities
 
-            Button(
+            ElevatedButton(
                 onClick = {
                     selectedActivities = if (isSelected) {
                         selectedActivities - activity
@@ -51,11 +52,13 @@ fun activityCards(activityList: List<ActivityModel>): List<ActivityModel> {
                         selectedActivities + activity
                     }
                 },
-                modifier = Modifier.padding(horizontal = 5.dp)
+                modifier = Modifier.padding(horizontal = 2.dp)
             ) {
                 Row {
+
+                    Icon(painter = painterResource(id = activity.activityIcon), contentDescription = "")
                     Text(
-                        text = activity.activityName,
+                        text = "\t${activity.activityName}",
                         modifier = Modifier
                             .height(20.dp)
                     )

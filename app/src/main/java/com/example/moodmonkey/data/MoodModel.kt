@@ -55,5 +55,5 @@ val basicActivities: List<ActivityModel> = listOf(
     ActivityModel(id = 4, activityName = "Hobby", activityIcon = R.drawable.baseline_directions_bike_24),
     ActivityModel(id = 5, activityName = "Education", activityIcon = R.drawable.baseline_menu_book_24),
     ActivityModel(id = 6, activityName = "Travel", activityIcon = R.drawable.baseline_flight_takeoff_24),
-    ActivityModel(id = 7,activityName = "Entertainment", activityIcon = R.drawable.baseline_live_tv_24),
+    ActivityModel(id = 7,activityName = "SocialMedia", activityIcon = R.drawable.baseline_live_tv_24),
 )
