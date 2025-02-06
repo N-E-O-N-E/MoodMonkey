@@ -16,11 +16,10 @@ data class EntryModel(
     val moodEntryTime: String,
 )
 
-@Entity(
-    tableName = "entryToActivityList",
-    primaryKeys = ["entryId", "activityId"]
-)
+@Entity(tableName = "entryToActivityList")
 data class EntryToActivity(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
     val entryId: Int,
     val activityId: Int
 )

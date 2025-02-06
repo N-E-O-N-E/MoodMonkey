@@ -14,6 +14,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -23,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.moodmonkey.data.ActivityModel
 import com.example.moodmonkey.data.EntryModel
@@ -32,13 +34,17 @@ import com.example.moodmonkey.views.Components.activityCards
 import com.example.moodmonkey.views.Components.activityDatePicker
 import com.example.moodmonkey.views.Components.activitySlider
 import com.example.moodmonkey.views.Components.activityTimePicker
-
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewEntryView(
     viewModel: MoodEntryViewModel = viewModel()
 ) {
+    val lastEntry by viewModel.getLastEntry.collectAsState()
+
+
     var moodTitle by remember { mutableStateOf("") }
     var moodContent by remember { mutableStateOf("") }
     var datePickerValue: String = ""
@@ -74,7 +80,6 @@ fun NewEntryView(
         var selectedActivities: List<ActivityModel> = activityCards(activityList = basicActivities)
 
 
-
         TextField(value = moodTitle,
             onValueChange = { moodTitle = it },
             modifier = Modifier
@@ -95,38 +100,38 @@ fun NewEntryView(
             placeholder = { Text("Add Content") }
         )
 
-
         Spacer(modifier = Modifier.weight(1f))
-
 
         Button(modifier = Modifier
             .fillMaxWidth(1f)
             .padding(vertical = 10.dp),
             onClick = {
-                var newMoodEntry = EntryModel(
-                    id = 0,
-                    moodEntryTitle = moodTitle,
-                    moodEntryContent = moodContent,
-                    moodEntryBar = moodSliderValue.toFloat(),
-                    moodEntryDate = datePickerValue,
-                    moodEntryTime = timePickerValue
-                )
-                viewModel.insert(newMoodEntry)
-                selectedActivities.forEach { activity ->
-                    Log.d("MainActivity", activity.activityName)
-                    Log.d("MainActivity", activity.id.toString())
-                    Log.d("MainActivity", newMoodEntry.id.toString())
+                viewModel.viewModelScope.launch {
+                    var newMoodEntry = EntryModel(
+                        moodEntryTitle = moodTitle,
+                        moodEntryContent = moodContent,
+                        moodEntryBar = moodSliderValue.toFloat(),
+                        moodEntryDate = datePickerValue,
+                        moodEntryTime = timePickerValue
+                    )
+                    viewModel.insert(newMoodEntry)
 
-                    viewModel.saveRelationchips(newMoodEntry.id, activity.id)
+                    delay(500)
+
+                    var lastEntryElement = lastEntry.lastOrNull()
+                    selectedActivities.forEach { activity ->
+                        viewModel.saveRelationchips(lastEntryElement?.id ?: 0, activity.id)
+                    }
+
+                    // Reset Values
+                    moodTitle = ""
+                    moodContent = ""
+                    moodSliderValue = 50.0f
+                    datePickerValue = ""
+                    timePickerValue = ""
+                    selectedActivities = emptyList()
+
                 }
-                // Reset Values
-                moodTitle = ""
-                moodContent = ""
-                moodSliderValue = 50.0f
-                datePickerValue = ""
-                timePickerValue = ""
-                selectedActivities = emptyList()
-
             }
 
         ) {

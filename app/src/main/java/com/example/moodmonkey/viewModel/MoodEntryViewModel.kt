@@ -1,7 +1,7 @@
 package com.example.moodmonkey.viewModel
 
-import android.R.attr.data
 import android.app.Application
+import androidx.datastore.dataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
@@ -13,12 +13,15 @@ import com.example.moodmonkey.data.EntryToActivity
 import com.example.moodmonkey.data.MoodDatabase
 import com.example.moodmonkey.data.basicActivities
 import com.example.moodmonkey.dataStore
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlin.enums.enumEntries
 
 private val DATASTORE_ACTIVITY_STATE = booleanPreferencesKey("isActivityInitialized")
 
@@ -47,6 +50,19 @@ class MoodEntryViewModel(application: Application) : AndroidViewModel(applicatio
             started = SharingStarted.WhileSubscribed(),
             initialValue = emptyList()
         )
+
+    val getLastEntry: StateFlow<List<EntryModel>> = dao
+        .getMoodListLastEntryID()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(),
+            initialValue = emptyList<EntryModel>()
+        )
+
+//    fun getLastEntryId(): EntryModel {
+//
+//        return dao.getMoodListLastEntryID()
+//    }
 
     fun update(mood: EntryModel) {
         viewModelScope.launch {
