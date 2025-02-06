@@ -19,13 +19,14 @@ import androidx.compose.ui.unit.dp
 import com.vanpra.composematerialdialogs.MaterialDialog
 import com.vanpra.composematerialdialogs.datetime.time.timepicker
 import com.vanpra.composematerialdialogs.rememberMaterialDialogState
+import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
 
 @Composable
 fun activityTimePicker(modifier: Modifier = Modifier): String {
-    var timePickerValue by remember { mutableStateOf("Time select") }
+    var timePickerValue by remember { mutableStateOf(LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm"))) }
     val dialogState = rememberMaterialDialogState()
 
     MaterialDialog(
@@ -36,7 +37,7 @@ fun activityTimePicker(modifier: Modifier = Modifier): String {
         }
     ) {
         timepicker { time ->
-            timePickerValue = time.toString().format(DateTimeFormatter.ofPattern("HH:MM"))
+            timePickerValue = time.toString()
         }
     }
 

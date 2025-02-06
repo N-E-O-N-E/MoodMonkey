@@ -1,4 +1,5 @@
 import android.R.attr.fontWeight
+import android.R.attr.onClick
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -24,6 +25,7 @@ import com.example.moodmonkey.data.EntryModel
 import com.example.moodmonkey.ui.theme.MoodMonkeyTheme
 import com.example.moodmonkey.ui.theme.primaryLight
 import com.example.moodmonkey.ui.theme.secondaryContainerLight
+import java.time.format.DateTimeFormatter
 
 @Composable
 fun MoodEntryCardView(
