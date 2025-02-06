@@ -46,7 +46,6 @@ fun NewEntryView(
 ) {
     val lastEntry by viewModel.getLastEntry.collectAsState()
 
-
     var moodTitle by remember { mutableStateOf("") }
     var moodContent by remember { mutableStateOf("") }
     var datePickerValue: String = ""

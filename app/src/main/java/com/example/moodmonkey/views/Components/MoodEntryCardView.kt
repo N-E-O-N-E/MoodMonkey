@@ -83,6 +83,8 @@ fun MoodEntryCardView(
                         )
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Text(
+                                //Todo: Uhrzeit aktuell hartgecodet
+
                                 text = "⏰ 12:30",
                                 fontSize = MaterialTheme.typography.bodyLarge.fontSize,
                             )
