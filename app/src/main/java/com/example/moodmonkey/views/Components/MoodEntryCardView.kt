@@ -30,7 +30,7 @@ fun MoodEntryCardView(
     entry: EntryModel,
 ) {
     var showContent by remember { mutableStateOf(false) }
-
+    var titleText by remember { mutableStateOf("") }
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -43,7 +43,15 @@ fun MoodEntryCardView(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(primaryLight)
+                    .background(
+                        when {
+                            entry.moodEntryBar <= 20.0 -> Color.Red.copy(alpha = 0.2F)
+                            entry.moodEntryBar in 20.1..40.0 -> Color.Magenta.copy(alpha = 0.2F)
+                            entry.moodEntryBar in 40.1..60.0 -> Color.Blue.copy(alpha = 0.2F)
+                            entry.moodEntryBar in 60.1..80.0 -> Color.Green.copy(alpha = 0.2F)
+                            else -> Color.Yellow.copy(alpha = 0.2F)
+                        }
+                    )
                     .padding(8.dp),
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically
@@ -52,7 +60,7 @@ fun MoodEntryCardView(
                     text = "Date: ${entry.moodEntryDate}",
                     fontSize = MaterialTheme.typography.bodyLarge.fontSize,
                     fontWeight = FontWeight.Bold,
-                    color = Color.White
+                    color = Color.Black
                 )
                 Spacer(
                     modifier = Modifier
@@ -66,7 +74,16 @@ fun MoodEntryCardView(
                     .padding(16.dp)
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.amazing),
+                    painter = painterResource(
+                        id = when {
+                            entry.moodEntryBar <= 20.0 -> R.drawable.angry
+                            entry.moodEntryBar  in 20.1..40.0 -> R.drawable.sad
+                            entry.moodEntryBar  in 40.1..60.0 -> R.drawable.neutral
+                            entry.moodEntryBar  in 60.1..80.0 -> R.drawable.happy
+                            else -> R.drawable.amazing
+
+                        }
+                    ),
                     contentDescription = null,
                     modifier = Modifier
                         .size(60.dp)
@@ -89,7 +106,14 @@ fun MoodEntryCardView(
                             .fillMaxWidth()
                     ) {
                         Text(
-                            text = entry.moodEntryTitle,
+                            text = when {
+                                entry.moodEntryBar <= 20.0 -> "Angry"
+                                entry.moodEntryBar  in 20.1..40.0 -> "Sad"
+                                entry.moodEntryBar  in 40.1..60.0 -> "Neutral"
+                                entry.moodEntryBar  in 60.1..80.0 -> "Happy"
+                                else -> "Amazing"
+
+                            },
                             fontWeight = FontWeight.Bold,
                             fontSize = MaterialTheme.typography.titleLarge.fontSize,
                         )
@@ -229,7 +253,7 @@ fun MoodEntryCardPreview() {
                 id = 1,
                 moodEntryTitle = "Happy Day!",
                 moodEntryContent = "Heute war ein toller Tag, weil ich nach langem endlich Milan wieder beleidigen konnte während Dieter am reden war..",
-                moodEntryBar = 0.5f,
+                moodEntryBar = 61f,
                 moodEntryDate = "03.02.2025",
                 moodEntryTime = "15:52"
             )
