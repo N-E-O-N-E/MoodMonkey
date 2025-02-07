@@ -35,7 +35,7 @@ fun AlertDialogPopUp(
                     onConfirmation()
                 }
             ) {
-                Text("Save it")
+                Text("Ok")
             }
         },
         dismissButton = {
@@ -44,7 +44,7 @@ fun AlertDialogPopUp(
                     onDismissRequest()
                 }
             ) {
-                Text("Chancel")
+                Text("Dismiss")
             }
         }
     )

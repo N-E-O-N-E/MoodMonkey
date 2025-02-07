@@ -173,7 +173,7 @@ fun MoodEntryCardView(
 
                             LazyRow(
                                 modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.Start
+                                horizontalArrangement = Arrangement.SpaceEvenly
                             ) {
 
                                 items(activitiesForEntries) { activity ->

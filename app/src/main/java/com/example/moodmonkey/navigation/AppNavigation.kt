@@ -26,6 +26,7 @@ import com.example.moodmonkey.views.MoodEntryListView
 import com.example.moodmonkey.views.NewEntryView
 import com.example.moodmonkey.views.StatisticView
 
+
 @Composable
 fun AppNavigation() {
     val viewModel: MoodEntryViewModel = viewModel()
