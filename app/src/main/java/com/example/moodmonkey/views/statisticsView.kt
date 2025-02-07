@@ -1,5 +1,6 @@
 package com.example.moodmonkey.views
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.core.EaseInOutCubic
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
@@ -30,6 +31,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.moodmonkey.R
+import com.example.moodmonkey.viewModel.MoodEntryViewModel
 import ir.ehsannarmani.compose_charts.LineChart
 import ir.ehsannarmani.compose_charts.extensions.format
 import ir.ehsannarmani.compose_charts.models.AnimationMode
@@ -42,9 +44,18 @@ import ir.ehsannarmani.compose_charts.models.Line
 import ir.ehsannarmani.compose_charts.models.LineProperties
 import ir.ehsannarmani.compose_charts.models.PopupProperties
 import ir.ehsannarmani.compose_charts.models.StrokeStyle
+import kotlin.ranges.contains
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
-fun StatisticView(modifier: Modifier = Modifier) {
+fun StatisticView(modifier: Modifier = Modifier, viewModel: MoodEntryViewModel) {
+
+    val angryMoods = viewModel.allMoods.value.filter { it.moodEntryBar <= 20 }
+    val sadMoods = viewModel.allMoods.value.filter { it.moodEntryBar in 20.1..40.0 }
+    val neutralMoods = viewModel.allMoods.value.filter { it.moodEntryBar in 40.1..60.0 }
+    val happyMoods = viewModel.allMoods.value.filter { it.moodEntryBar in 60.1..80.0 }
+    val amazingMoods = viewModel.allMoods.value.filter { it.moodEntryBar >= 80 }
+
     val gridProperties = GridProperties(
         xAxisProperties = GridProperties.AxisProperties(
             thickness = .2.dp,
@@ -100,54 +111,26 @@ fun StatisticView(modifier: Modifier = Modifier) {
             val data = remember {
                 listOf(
                     Line(
-                        label = "Windows",
-                        values = listOf(
-                            75.0,
-                            5.0,
-                            70.0,
-                            85.0,
-                            0.0
-                        ),
-                        color = SolidColor(Color(0xFF2B8130)),
-                        firstGradientFillColor = Color(0xFF66BB6A).copy(alpha = .4f),
+                        label = "Schlechte Laune",
+                        values = listOf(angryMoods.size.toDouble(), sadMoods.size.toDouble()),
+                        color = SolidColor(Color(0xFF851B1B)),
+                        firstGradientFillColor = Color(0xFFBB3030).copy(alpha = .6f),
                         secondGradientFillColor = Color.Transparent,
                         strokeAnimationSpec = tween(2000, easing = EaseInOutCubic),
                         gradientAnimationDelay = 1000,
-                        drawStyle = DrawStyle.Stroke(.5.dp),
+                        drawStyle = DrawStyle.Stroke(1.dp),
                         curvedEdges = true
                     ),
                     Line(
-                        label = "Linux",
-                        values = listOf(
-                            1.0,
-                            19.0,
-                            22.0,
-                            0.0,
-                            5.0
-                        ),
-                        color = SolidColor(Color(0xFFDA860C)),
-                        firstGradientFillColor = Color(0xFFFFA726).copy(alpha = .4f),
+                        label = "Gute Laune",
+                        values = listOf(amazingMoods.size.toDouble(), happyMoods.size.toDouble(), neutralMoods.size.toDouble()),
+                        color = SolidColor(Color(0xFF2AC00F)),
+                        firstGradientFillColor = Color(0xFF9FEF6C).copy(alpha = .4f),
                         secondGradientFillColor = Color.Transparent,
                         strokeAnimationSpec = tween(2000, easing = EaseInOutCubic),
                         gradientAnimationDelay = 1000,
-                        drawStyle = DrawStyle.Stroke(.5.dp)
-                    ),
-                    Line(
-                        label = "MacOS",
-                        values = listOf(
-                            4.0,
-                            40.0,
-                            58.0,
-                            38.0,
-                            22.0
-                        ),
-                        color = SolidColor(Color(0xFF0F73C4)),
-                        firstGradientFillColor = Color(0xFF42A5F5).copy(alpha = .4f),
-                        secondGradientFillColor = Color.Transparent,
-                        strokeAnimationSpec = tween(2000, easing = EaseInOutCubic),
-                        gradientAnimationDelay = 1000,
-                        drawStyle = DrawStyle.Stroke(.5.dp),
-                        curvedEdges = true,
+                        drawStyle = DrawStyle.Stroke(1.dp),
+                        curvedEdges = true
                     ),
                 )
             }
@@ -167,29 +150,30 @@ fun StatisticView(modifier: Modifier = Modifier) {
                         .fillMaxSize()
                         .padding(vertical = 12.dp)
                 ) {
+
                     LineChart(
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(horizontal = 22.dp),
                         data = data,
                         animationMode = AnimationMode.Together(delayBuilder = {
-                            it * 500L
+                            it * 300L
                         }),
                         gridProperties = gridProperties,
                         dividerProperties = dividerProperties,
                         popupProperties = PopupProperties(
                             textStyle = TextStyle(
-                                fontSize = 11.sp,
+                                fontSize = 15.sp,
                                 color = Color.White,
                             ),
                             contentBuilder = {
-                                it.format(1) + " Million"
+                                it.format(1) + " Moods"
                             },
                             containerColor = Color(0xff414141)
                         ),
                         indicatorProperties = HorizontalIndicatorProperties(
                             textStyle = TextStyle(
-                                fontSize = 11.sp,
+                                fontSize = 15.sp,
                                 color = Color.White,
                             ),
                             contentBuilder = {

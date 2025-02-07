@@ -73,7 +73,7 @@ fun AppNavigation() {
             }
 
             composable<StatisticsRoute> {
-                StatisticView()
+                StatisticView(viewModel = viewModel)
             }
         }
     }
