@@ -43,31 +43,31 @@ fun SummaryPieChart(viewModel: MoodEntryViewModel) {
     val pieData = listOf(
         Pie(
             label = "Angry",
-            data = 20.0,
+            data = angryMoods.size.toDouble(),
             color = Color(0xFFE01111).copy(alpha = 0.8f),
             selectedColor = Color(0xFFDE5C5C),
         ),
         Pie(
             label = "Sad",
-            data = 14.0,
+            data = sadMoods.size.toDouble(),
             color = Color(0xFF6223CE).copy(alpha = 0.8f),
             selectedColor =  Color(0xFF7355E1),
         ),
         Pie(
             label = "Neutral",
-            data = 40.0,
+            data = neutralMoods.size.toDouble(),
             color = Color(0xFF2047D5).copy(alpha = 0.8f),
             selectedColor = Color(0xFF4EA7E7),
         ),
         Pie(
             label = "Happy",
-            data = 10.0,
+            data = happyMoods.size.toDouble(),
             color = Color(0xFF44C51E).copy(alpha = 0.8f),
             selectedColor = Color(0xFF57E548),
         ),
         Pie(
             label = "Amazing",
-            data = 9.0,
+            data = amazingMoods.size.toDouble(),
             color = Color(0xFFD3C11F).copy(alpha = 0.8f),
             selectedColor = Color(0xFFE5D552),
         ),
@@ -107,5 +107,4 @@ fun SummaryPieChart(viewModel: MoodEntryViewModel) {
                 spaceDegree = 7f
             )
         }
-
 }
