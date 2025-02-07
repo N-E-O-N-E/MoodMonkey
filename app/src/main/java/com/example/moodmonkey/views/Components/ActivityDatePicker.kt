@@ -2,6 +2,7 @@ package com.example.moodmonkey.views.Components
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -22,14 +23,13 @@ import androidx.compose.ui.unit.dp
 import com.vanpra.composematerialdialogs.MaterialDialog
 import com.vanpra.composematerialdialogs.datetime.date.datepicker
 import com.vanpra.composematerialdialogs.rememberMaterialDialogState
+import kotlinx.coroutines.selects.select
 import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 
 @Composable
 fun activityDatePicker(modifier: Modifier = Modifier): String {
-    var datePickerValue by remember { mutableStateOf(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))) }
+    var datePickerValue by remember { mutableStateOf("Date select") }
     val dialogState = rememberMaterialDialogState()
 
     MaterialDialog(
@@ -40,7 +40,7 @@ fun activityDatePicker(modifier: Modifier = Modifier): String {
         }
     ) {
         datepicker { date ->
-            datePickerValue = date.toString().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+            datePickerValue = date.toString()
         }
     }
 
