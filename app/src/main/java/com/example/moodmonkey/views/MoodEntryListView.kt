@@ -2,7 +2,9 @@ package com.example.moodmonkey.views
 
 import MoodEntryCardView
 import android.R.attr.bottom
+import android.R.attr.contentDescription
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -37,7 +39,7 @@ fun MoodEntryListView(
 
     Box {
         Image(
-            painter = painterResource(id = R.drawable.wallpaper),
+            painter = if(!isSystemInDarkTheme()) { painterResource(id = R.drawable.wallpaper) } else { painterResource(id = R.drawable.wallpaper_darkmode)},
             contentDescription = null,
             contentScale = ContentScale.Crop,
             alpha = 0.6F,

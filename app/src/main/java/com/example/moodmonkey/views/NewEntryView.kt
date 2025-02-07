@@ -1,6 +1,7 @@
 package com.example.moodmonkey.views
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -63,7 +64,7 @@ fun NewEntryView(
 
     Box {
         Image(
-            painter = painterResource(id = R.drawable.wallpaper),
+            painter = if(!isSystemInDarkTheme()) { painterResource(id = R.drawable.wallpaper) } else { painterResource(id = R.drawable.wallpaper_darkmode)},
             contentDescription = null,
             contentScale = ContentScale.Crop,
             alpha = 0.4F,
