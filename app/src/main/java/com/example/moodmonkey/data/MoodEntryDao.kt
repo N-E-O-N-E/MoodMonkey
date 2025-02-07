@@ -24,7 +24,7 @@ interface MoodDao {
     @Query("SELECT * FROM entryToActivityList WHERE entryId = :entryId")
     fun getActivitiesForEntry(entryId: Int): Flow<List<EntryToActivity>>
 
-    @Query("SELECT * FROM moodList ORDER BY id DESC")
+    @Query("SELECT * FROM moodList ORDER BY moodEntryDate, moodEntryTime DESC")
     fun getAllItems(): Flow<List<EntryModel>>
 
     @Query("SELECT * FROM moodList ORDER BY id DESC LIMIT 1")
