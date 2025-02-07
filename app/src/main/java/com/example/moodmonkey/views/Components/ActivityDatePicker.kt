@@ -25,11 +25,13 @@ import com.vanpra.composematerialdialogs.datetime.date.datepicker
 import com.vanpra.composematerialdialogs.rememberMaterialDialogState
 import kotlinx.coroutines.selects.select
 import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 @Composable
 fun activityDatePicker(modifier: Modifier = Modifier): String {
-    var datePickerValue by remember { mutableStateOf("Date select") }
+    var datePickerValue by remember { mutableStateOf(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))) }
     val dialogState = rememberMaterialDialogState()
 
     MaterialDialog(

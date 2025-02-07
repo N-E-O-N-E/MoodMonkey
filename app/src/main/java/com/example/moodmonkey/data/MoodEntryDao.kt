@@ -21,14 +21,18 @@ interface MoodDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(mood: EntryModel)
 
+
+
     @Query("SELECT * FROM entryToActivityList WHERE entryId = :entryId")
     fun getActivitiesForEntry(entryId: Int): Flow<List<EntryToActivity>>
 
-    @Query("SELECT * FROM moodList ORDER BY moodEntryDate, moodEntryTime DESC")
+    @Query("SELECT * FROM moodList ORDER BY id DESC")
     fun getAllItems(): Flow<List<EntryModel>>
 
     @Query("SELECT * FROM moodList ORDER BY id DESC LIMIT 1")
     fun getMoodListLastEntryID(): Flow<List<EntryModel>>
+
+
 
     @Delete
     suspend fun delete(mood: EntryModel)
