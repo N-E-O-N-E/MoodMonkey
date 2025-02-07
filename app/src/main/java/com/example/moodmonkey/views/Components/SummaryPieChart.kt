@@ -71,7 +71,7 @@ fun SummaryPieChart(viewModel: MoodEntryViewModel) {
             color = Color(0xFFD3C11F).copy(alpha = 0.8f),
             selectedColor = Color(0xFFE5D552),
         ),
-    )
+    ).filter { it.data > 0 }
 
 
     var data by remember {
