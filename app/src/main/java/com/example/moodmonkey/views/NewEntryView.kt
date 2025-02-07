@@ -120,7 +120,7 @@ fun NewEntryView(
                 onValueChange = { moodContent = it },
                 modifier = Modifier
                     .fillMaxWidth(1f)
-                    .height(150.dp)
+                    .height(100.dp)
                     .padding(vertical = 5.dp),
                 shape = RectangleShape,
                 singleLine = false,
