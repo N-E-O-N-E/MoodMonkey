@@ -70,7 +70,10 @@ fun AppNavigation() {
             }
 
             composable<NewEntryRoute> {
-                NewEntryView(viewModel, navController)
+                NewEntryView(
+                    viewModel, navController,
+                    selectedNavItem = { selectedNavItems = NavItem.First }
+                )
             }
 
             composable<StatisticsRoute> {

@@ -39,6 +39,7 @@ import com.example.moodmonkey.data.ActivityModel
 import com.example.moodmonkey.data.EntryModel
 import com.example.moodmonkey.data.basicActivities
 import com.example.moodmonkey.navigation.DashboardRoute
+import com.example.moodmonkey.navigation.NavItem
 import com.example.moodmonkey.viewModel.MoodEntryViewModel
 import com.example.moodmonkey.views.Components.AlertDialogPopUp
 import com.example.moodmonkey.views.Components.activityCards
@@ -52,7 +53,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun NewEntryView(
     viewModel: MoodEntryViewModel,
-    navController: NavHostController
+    navController: NavHostController,
+    selectedNavItem: () -> Unit
 ) {
     val lastEntry by viewModel.getLastEntry.collectAsState()
     val openAlertDialog = remember { mutableStateOf(false) }
@@ -175,6 +177,7 @@ fun NewEntryView(
 
                                 openAlertDialog.value = false
                                 navController.navigate(DashboardRoute)
+                                selectedNavItem()
                             }
                         },
                         dialogTitle = "SAVE ENTRY?",
