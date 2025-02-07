@@ -1,6 +1,4 @@
-import android.R.attr.contentDescription
-import android.R.attr.fontWeight
-import android.R.attr.onClick
+import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -8,16 +6,19 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -30,25 +31,21 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.moodmonkey.R
 import com.example.moodmonkey.data.EntryModel
 import com.example.moodmonkey.data.basicActivities
-import com.example.moodmonkey.navigation.DashboardRoute
 import com.example.moodmonkey.ui.theme.MoodMonkeyTheme
-import com.example.moodmonkey.ui.theme.onErrorContainerLight
-import com.example.moodmonkey.ui.theme.primaryLight
-import com.example.moodmonkey.ui.theme.secondaryContainerLight
-import com.example.moodmonkey.ui.theme.surfaceBrightLight
-import com.example.moodmonkey.ui.theme.surfaceDimLight
 import com.example.moodmonkey.viewModel.MoodEntryViewModel
 import com.example.moodmonkey.views.Components.AlertDialogPopUp
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.time.format.DateTimeFormatter
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun MoodEntryCardView(
     entry: EntryModel, viewModel: MoodEntryViewModel
 ) {
     var showContent by remember { mutableStateOf(false) }
     var openAlertDialog = remember { mutableStateOf(false) }
+
+    val activitiesForEntries by viewModel.getActivitiesForEntry(entry.id)
+        .collectAsState(initial = emptyList())
 
     Surface(
         modifier = Modifier
@@ -174,31 +171,32 @@ fun MoodEntryCardView(
                     ) {
                         Column {
 
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth(),
+                            LazyRow(
+                                modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.Start
                             ) {
 
-                                //Todo: Activities aus der Datenbank für dieses Entrie lesen und ausgeben (forEach/Items)
+                                items(activitiesForEntries) { activity ->
+                                    val activity =
+                                        basicActivities.find { it.id == activity.activityId }
+                                    activity?.let {
 
-
-                                basicActivities.forEach() { item ->
-                                    Image(
-                                        painter = painterResource(
-                                            if (isSystemInDarkTheme()) {
-                                                item.activityIconLight
-                                            } else {
-                                                item.activityIconDark
-                                            }
-                                        ),
-                                        contentDescription = "", contentScale = ContentScale.Fit,
-                                        modifier = Modifier
-                                            .padding(horizontal = 2.dp)
-                                            .width(28.dp)
-                                            .height(28.dp)
-                                    )
-
+                                        Image(
+                                            painter = painterResource(
+                                                if (isSystemInDarkTheme()) {
+                                                    it.activityIconLight
+                                                } else {
+                                                    it.activityIconDark
+                                                }
+                                            ),
+                                            contentDescription = "",
+                                            contentScale = ContentScale.Fit,
+                                            modifier = Modifier
+                                                .padding(horizontal = 2.dp)
+                                                .width(28.dp)
+                                                .height(28.dp)
+                                        )
+                                    }
                                 }
                             }
 

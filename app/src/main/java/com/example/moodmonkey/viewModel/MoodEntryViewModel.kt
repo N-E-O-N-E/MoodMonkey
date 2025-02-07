@@ -59,10 +59,15 @@ class MoodEntryViewModel(application: Application) : AndroidViewModel(applicatio
             initialValue = emptyList<EntryModel>()
         )
 
-//    fun getLastEntryId(): EntryModel {
-//
-//        return dao.getMoodListLastEntryID()
-//    }
+    val getActivitiesForEntry: (Int) -> StateFlow<List<EntryToActivity>> = { entryId ->
+        dao
+            .getActivitiesForEntry(entryId)
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(),
+                initialValue = emptyList()
+            )
+    }
 
     fun update(mood: EntryModel) {
         viewModelScope.launch {
@@ -103,6 +108,4 @@ class MoodEntryViewModel(application: Application) : AndroidViewModel(applicatio
             dao.insertRelationchip(EntryToActivity(entryId = moodEntry, activityId = activity))
         }
     }
-
-
 }

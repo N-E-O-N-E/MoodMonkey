@@ -66,7 +66,7 @@ fun MoodEntryListView(
 //                }
 
                 //Jetzt mit Datenbankabfrage
-                viewModel.allMoods.value.forEach{entry ->
+                viewModel.allMoods.value.forEach{ entry ->
                     item {
                         MoodEntryCardView(entry = entry, viewModel = viewModel)
                     }
