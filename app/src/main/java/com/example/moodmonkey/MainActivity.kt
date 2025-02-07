@@ -19,7 +19,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MoodMonkeyTheme(darkTheme = isSystemInDarkTheme(), dynamicColor = false) {
+            MoodMonkeyTheme(darkTheme = isSystemInDarkTheme(), dynamicColor = true) {
                 AppNavigation()
             }
         }
