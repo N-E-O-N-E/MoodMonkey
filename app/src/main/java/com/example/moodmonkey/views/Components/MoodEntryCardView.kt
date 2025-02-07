@@ -210,7 +210,7 @@ fun MoodEntryCardView(
                                 modifier = Modifier
                                     .fillMaxWidth(),
                                 thickness = 1.dp,
-                                color = Color.Black
+                                color = if(isSystemInDarkTheme()) { Color.White} else { Color.Black}
                             )
 
                             Text(
@@ -236,7 +236,7 @@ fun MoodEntryCardView(
                                 modifier = Modifier
                                     .fillMaxWidth(),
                                 thickness = 1.dp,
-                                color = Color.Black
+                                color = if(isSystemInDarkTheme()) { Color.White} else { Color.Black}
                             )
 
                             Row(
