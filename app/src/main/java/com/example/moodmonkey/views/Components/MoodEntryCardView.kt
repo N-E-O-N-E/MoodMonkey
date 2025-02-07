@@ -1,4 +1,3 @@
-import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -36,7 +35,6 @@ import com.example.moodmonkey.viewModel.MoodEntryViewModel
 import com.example.moodmonkey.views.Components.AlertDialogPopUp
 import kotlinx.coroutines.launch
 
-@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun MoodEntryCardView(
     entry: EntryModel, viewModel: MoodEntryViewModel

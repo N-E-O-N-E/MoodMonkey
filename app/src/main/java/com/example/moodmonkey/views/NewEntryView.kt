@@ -39,7 +39,6 @@ import com.example.moodmonkey.data.ActivityModel
 import com.example.moodmonkey.data.EntryModel
 import com.example.moodmonkey.data.basicActivities
 import com.example.moodmonkey.navigation.DashboardRoute
-import com.example.moodmonkey.navigation.NavItem
 import com.example.moodmonkey.viewModel.MoodEntryViewModel
 import com.example.moodmonkey.views.Components.AlertDialogPopUp
 import com.example.moodmonkey.views.Components.activityCards

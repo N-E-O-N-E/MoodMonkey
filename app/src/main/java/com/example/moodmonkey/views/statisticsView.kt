@@ -20,7 +20,6 @@ import com.example.moodmonkey.R
 import com.example.moodmonkey.viewModel.MoodEntryViewModel
 import com.example.moodmonkey.views.Components.SummaryLineChart
 import com.example.moodmonkey.views.Components.SummaryPieChart
-import ir.ehsannarmani.compose_charts.PieChart
 
 @Composable
 fun StatisticView(modifier: Modifier = Modifier, viewModel: MoodEntryViewModel) {
