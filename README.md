@@ -1,110 +1,14 @@
-# libs.versions.toml
+# MoodMonkey
+## Ein Testprojekt im Rahmen einer Projektwoche
 
-[versions]
-```sh
-//Navigation
-navigationCompose = "2.8.3"
-kotlinSerialization = "1.6.3"
+### MoodMonkey ist ein Prototyp einer Mood App mit deren Hilfe man unterschiedliche Stimmungszustände
+journalartig einagben und verwalten kann. Die App bietet aktuell eine noch spielerische Oberflächen UI 
+und neben der Möglichkeit der Moodanzeige im MainScreen, neue Moods mit verschiedenen Parametern zu speichern.
+Genutzt wird hierbei Room für die persistente Datenspeicherung.
 
-//DataStore
-datastorePreferences = "1.1.1"
-
-//Room
-roomRuntime = "2.6.1"
-kspVersion = "2.0.21-1.0.27"
-
-//Charts
-composeCharts = "0.1.1"
-
-//DateTime
-composeDateTime = "0.9.0"
-
-```
-
-[libraries]
-```sh
-//Navigation
-androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
-kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerialization" }
-
-//ViewModel
-androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycleRuntimeKtx" }
-
-//DataStore
-androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastorePreferences" }
-
-//Room
-androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
-androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntime" }
-androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
-
-//Charts
-compose-charts = { module = "io.github.ehsannarmani:compose-charts", version.ref = "composeCharts" }
-
-//DateTimePicker
-datetime = { module = "io.github.vanpra.compose-material-dialogs:datetime", version.ref = "composeDateTime" }
-
-```
-
-[plugins]
-```sh
-//Navigation
-jetbrains-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-
-//Room
-kotlin-ksp = {id = "com.google.devtools.ksp", version.ref = "kspVersion"}
-```
+Die Moodverwaltung als solche funktioniert. Statistik View ist noch in der absoluten Entwurfsphase.
 
 
-
-
-# build.gradle.kts (Module :app)
-
-plugins {
-```sh
-//Navigation
-alias(libs.plugins.jetbrains.kotlin.serialization)
-
-//Room
-alias(libs.plugins.kotlin.ksp)
-```
-}
-
-dependencies {
-```sh
-//Navigation
-implementation(libs.androidx.navigation.compose)
-implementation(libs.kotlinx.serialization)
-
-//ViewModel
-implementation(libs.androidx.lifecycle.viewmodel.compose)
-
-//DataStore
-implementation(libs.androidx.datastore.preferences)
-
-//Room
-implementation(libs.androidx.room.runtime)
-implementation(libs.androidx.room.ktx)
-ksp(libs.androidx.room.compiler)
-
-// Charts
-implementation (libs.compose.charts)
-}
-
-// DateTimePicker
-implementation(libs.datetime)
-
-```
-
-
-
-
-
-# build.gradle.kts (Project: ...)
-
-plugins {
-```sh
-//Room
-alias(libs.plugins.kotlin.ksp) apply false
-```
-}
+![2025-02-21 23 32 06](https://github.com/user-attachments/assets/53547b2d-85ea-4564-8e21-0877d803ee72)
+![2025-02-21 23 32 27](https://github.com/user-attachments/assets/c25fff0c-53cc-469b-a8b7-c0e95ad18be9)
+![2025-02-21 23 33 01](https://github.com/user-attachments/assets/5b8fcef4-ba28-426a-b012-994a1360cb75)
